@@ -1,0 +1,358 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Controle da Reforma Tributária</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: estilo Apple — fundo cinza claro, cartões brancos arredondados, título grande, controle segmentado, cores de sistema */
+:root{
+  --bg:#f5f5f7; --card:#ffffff; --fg:#1d1d1f; --muted:#6e6e73; --hair:#d2d2d7; --fill:#e8e8ed;
+  --blue:#0071e3; --green:#34c759; --orange:#ff9500; --red:#ff3b30; --indigo:#5856d6; --gray:#8e8e93; --teal:#30b0c7;
+  --green-t:#248a3d; --orange-t:#c93400; --red-t:#d70015; --indigo-t:#3634a3; --blue-t:#0066cc;
+  --font:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Inter","Helvetica Neue",Arial,sans-serif;
+  --shadow:0 1px 2px rgba(0,0,0,.04),0 4px 16px rgba(0,0,0,.04);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#000000; --card:#1c1c1e; --fg:#f5f5f7; --muted:#a1a1a6; --hair:#38383a; --fill:#2c2c2e;
+  --blue:#0a84ff; --green:#30d158; --orange:#ff9f0a; --red:#ff453a; --indigo:#5e5ce6; --gray:#8e8e93; --teal:#40c8e0;
+  --green-t:#30d158; --orange-t:#ff9f0a; --red-t:#ff6961; --indigo-t:#7d7aff; --blue-t:#409cff;
+  --shadow:none; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#000000; --card:#1c1c1e; --fg:#f5f5f7; --muted:#a1a1a6; --hair:#38383a; --fill:#2c2c2e;
+  --blue:#0a84ff; --green:#30d158; --orange:#ff9f0a; --red:#ff453a; --indigo:#5e5ce6; --gray:#8e8e93; --teal:#40c8e0;
+  --green-t:#30d158; --orange-t:#ff9f0a; --red-t:#ff6961; --indigo-t:#7d7aff; --blue-t:#409cff;
+  --shadow:none; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--font);font-size:15px;line-height:1.47;-webkit-font-smoothing:antialiased;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 64px}
+.wrap{max-width:1080px;margin:0 auto}
+a{color:var(--blue-t);text-decoration:none}
+a:hover{text-decoration:underline}
+a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offset:2px;border-radius:8px}
+
+header.hero{padding-block:56px 28px;display:grid;gap:10px}
+.eyebrow{font-size:13px;font-weight:600;color:var(--orange-t);letter-spacing:.02em}
+h1{font-size:clamp(34px,6vw,56px);line-height:1.05;letter-spacing:-.025em;font-weight:700;margin:0;text-wrap:balance}
+.lede{font-size:clamp(17px,2.2vw,21px);color:var(--muted);max-width:60ch;margin:0;line-height:1.4}
+.asof{font-size:13px;color:var(--muted)}
+
+h2{font-size:clamp(24px,3.4vw,32px);letter-spacing:-.02em;margin:0;font-weight:700;text-wrap:balance}
+.sec{display:grid;gap:18px;margin-top:48px}
+.sec-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:12px}
+.sec-head p{margin:0;color:var(--muted);max-width:60ch}
+
+.card{background:var(--card);border-radius:18px;box-shadow:var(--shadow)}
+
+/* KPIs */
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.kpi{padding:20px 22px;display:grid;gap:4px}
+.kpi .lbl{font-size:13px;color:var(--muted);font-weight:500}
+.kpi .val{font-size:40px;font-weight:700;letter-spacing:-.03em;font-variant-numeric:tabular-nums;line-height:1.1}
+.kpi .sub{font-size:13px;color:var(--muted)}
+.kpi.next .val{font-size:22px;letter-spacing:-.01em;line-height:1.25}
+
+/* Charts */
+.charts{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}
+.chart{padding:24px;display:grid;gap:16px;align-content:start}
+.chart h3{margin:0;font-size:19px;letter-spacing:-.01em}
+.chart .note{margin:0;font-size:13px;color:var(--muted)}
+.donut-row{display:flex;gap:24px;align-items:center;flex-wrap:wrap}
+.donut{width:180px;max-width:100%;flex:none}
+.legend{display:grid;gap:10px;flex:1;min-width:180px}
+.lg{display:grid;grid-template-columns:12px 1fr auto;align-items:center;gap:10px;font-size:14px}
+.lg i{width:12px;height:12px;border-radius:50%;display:block}
+.lg b{font-variant-numeric:tabular-nums;font-weight:600}
+.lg span.n{color:var(--muted);font-weight:400;margin-left:6px;font-size:13px}
+.bars{display:grid;gap:14px}
+.bar{display:grid;gap:6px}
+.bar .top{display:flex;justify-content:space-between;font-size:14px}
+.bar .top b{font-variant-numeric:tabular-nums}
+.track{height:10px;border-radius:99px;background:var(--fill);overflow:hidden}
+.track span{display:block;height:100%;border-radius:99px}
+.progress-big{display:grid;gap:8px}
+.progress-big .track{height:14px}
+
+/* Segmented control */
+.toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+.seg{display:inline-flex;flex-wrap:wrap;background:var(--fill);border-radius:10px;padding:3px;gap:2px}
+.seg button{font:inherit;font-size:13px;font-weight:500;color:var(--fg);background:transparent;border:0;border-radius:8px;padding:6px 12px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--card);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.search{font:inherit;font-size:14px;padding:8px 12px;border-radius:10px;border:1px solid var(--hair);background:var(--card);color:var(--fg);min-width:0;width:240px;max-width:100%}
+
+/* Items */
+.year{font-size:13px;font-weight:600;color:var(--muted);letter-spacing:.04em;text-transform:uppercase;padding:18px 4px 6px}
+.list{display:grid;gap:0;overflow:hidden}
+.item{display:grid;grid-template-columns:120px minmax(0,1fr);gap:20px;padding:20px 22px;border-top:1px solid var(--hair)}
+.item:first-child{border-top:0}
+.when{display:grid;gap:2px;align-content:start}
+.when .d{font-size:17px;font-weight:600;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.when .rel{font-size:12px;color:var(--muted)}
+.body{display:grid;gap:8px;min-width:0}
+.titlerow{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.titlerow h4{margin:0;font-size:17px;letter-spacing:-.01em;font-weight:600;flex:1 1 280px}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:3px 10px;border-radius:99px;white-space:nowrap}
+.pill i{width:7px;height:7px;border-radius:50%;display:block}
+.cat{font-size:12px;color:var(--muted);font-weight:500}
+.body p{margin:0;max-width:72ch}
+.impact{font-size:14px;color:var(--muted)}
+.impact strong{color:var(--fg);font-weight:600}
+.meta{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px;color:var(--muted)}
+.docs{display:flex;flex-wrap:wrap;gap:6px}
+.doc{font-size:12px;padding:2px 8px;border-radius:6px;background:var(--fill);color:var(--fg)}
+.empty{padding:32px;text-align:center;color:var(--muted)}
+
+/* Refs */
+.refs{padding:8px 0}
+.ref{display:grid;grid-template-columns:36px minmax(0,1fr);gap:12px;padding:14px 22px;border-top:1px solid var(--hair)}
+.ref:first-child{border-top:0}
+.ref .k{font-size:13px;font-weight:600;color:var(--muted);font-variant-numeric:tabular-nums}
+.ref a{font-weight:500;overflow-wrap:anywhere}
+.ref .s{font-size:13px;color:var(--muted)}
+.callout{padding:18px 22px;font-size:14px;color:var(--muted);display:grid;gap:6px}
+.callout strong{color:var(--fg)}
+footer{margin-top:40px;font-size:12px;color:var(--muted);border-top:1px solid var(--hair);padding-top:16px}
+
+@media (max-width:820px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.charts{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:560px){.item{grid-template-columns:minmax(0,1fr);gap:8px}.when{display:flex;gap:10px;align-items:baseline}.kpi .val{font-size:32px}.search{width:100%}}
+@media (prefers-reduced-motion:no-preference){.track span{transition:width .6s ease}}
+</style>
+
+<div class="wrap">
+  <header class="hero">
+    <div class="eyebrow">Reforma Tributária do Consumo · IBS · CBS · IS</div>
+    <h1>Controle da Reforma Tributária</h1>
+    <p class="lede">Leis, normas técnicas e prazos de implantação, explicados em linguagem simples, com o impacto de cada demanda para a operação.</p>
+    <div class="asof" id="asof">Posição em 24 de novembro de 2026</div>
+  </header>
+
+  <section class="kpis" aria-label="Resumo">
+    <div class="card kpi"><div class="lbl">Itens acompanhados</div><div class="val" id="k-total">–</div><div class="sub">leis, atos e notas técnicas</div></div>
+    <div class="card kpi"><div class="lbl">Implantado</div><div class="val" id="k-done">–</div><div class="sub" id="k-done-sub"></div></div>
+    <div class="card kpi"><div class="lbl">Impacto crítico ou alto</div><div class="val" id="k-high">–</div><div class="sub" id="k-high-sub"></div></div>
+    <div class="card kpi next"><div class="lbl">Próximo prazo</div><div class="val" id="k-next">–</div><div class="sub" id="k-next-sub"></div></div>
+  </section>
+
+  <section class="sec" aria-labelledby="h-graf">
+    <div class="sec-head"><h2 id="h-graf">Percentuais</h2><p>Calculados sobre os itens listados abaixo.</p></div>
+    <div class="charts">
+      <div class="card chart">
+        <h3>Situação das demandas</h3>
+        <div class="donut-row">
+          <svg class="donut" viewBox="0 0 120 120" role="img" aria-labelledby="donut-t"><title id="donut-t">Percentual de itens por situação</title><g id="donut" transform="rotate(-90 60 60)"></g>
+            <text x="60" y="58" text-anchor="middle" font-size="22" font-weight="700" fill="var(--fg)" id="donut-pct">–</text>
+            <text x="60" y="74" text-anchor="middle" font-size="9" fill="var(--muted)">implantado</text></svg>
+          <div class="legend" id="legend-status"></div>
+        </div>
+      </div>
+      <div class="card chart">
+        <h3>Distribuição por impacto</h3>
+        <div class="bars" id="bars-impact"></div>
+        <p class="note">Impacto avaliado para empresas de varejo e para os sistemas emissores de documentos fiscais (ERP e PDV).</p>
+      </div>
+      <div class="card chart" style="grid-column:1/-1">
+        <h3>Avanço da transição 2026–2033</h3>
+        <div class="progress-big">
+          <div class="bar"><div class="top"><span>Tempo decorrido da transição (jan/2026 a jan/2033)</span><b id="p-time">–</b></div><div class="track"><span id="p-time-bar" style="background:var(--blue)"></span></div></div>
+          <div class="bar"><div class="top"><span>Marcos de 2026 já em vigor</span><b id="p-2026">–</b></div><div class="track"><span id="p-2026-bar" style="background:var(--green)"></span></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="h-itens">
+    <div class="sec-head"><h2 id="h-itens">Linha do tempo de implantação</h2><p>Cada item traz a data, o que muda em palavras simples e o impacto esperado.</p></div>
+    <div class="toolbar">
+      <div class="seg" role="group" aria-label="Filtrar por situação" id="seg"></div>
+      <input class="search" id="q" type="search" placeholder="Buscar: NFC-e, Simples, DeRE…" aria-label="Buscar itens">
+    </div>
+    <div id="timeline"></div>
+  </section>
+
+  <section class="sec" aria-labelledby="h-ref">
+    <div class="sec-head"><h2 id="h-ref">Referências da pesquisa</h2><p>Fontes oficiais e análises consultadas em 24/11/2026.</p></div>
+    <div class="card callout"><strong>Atenção para a validação</strong>Parte das datas de notas técnicas veio de comunicados citados por portais especializados. Antes de decisões de desenvolvimento ou de compliance, confirme no Portal Nacional da NF-e e nos atos publicados no Diário Oficial. As fontes divergem sobre quais documentos tiveram a rejeição automática suspensa e sobre a data da NFS-e geral.</div>
+    <div class="card refs" id="refs"></div>
+  </section>
+
+  <footer>Material de apoio à gestão, sem caráter de parecer jurídico ou contábil. Situação calculada para 24/11/2026; prazos futuros podem ser alterados pela Receita Federal e pelo Comitê Gestor do IBS.</footer>
+</div>
+
+<script>
+const TODAY = new Date('2026-11-24T12:00:00-03:00');
+
+const STATUS = {
+  done:    {label:'Implantado', color:'var(--green)', text:'var(--green-t)'},
+  prog:    {label:'Em andamento', color:'var(--blue)', text:'var(--blue-t)'},
+  watch:   {label:'Monitorar', color:'var(--orange)', text:'var(--orange-t)'},
+  todo:    {label:'Pendente', color:'var(--gray)', text:'var(--muted)'}
+};
+const IMPACT = {
+  crit:{label:'Crítico', color:'var(--red)', text:'var(--red-t)'},
+  high:{label:'Alto', color:'var(--orange)', text:'var(--orange-t)'},
+  med: {label:'Médio', color:'var(--indigo)', text:'var(--indigo-t)'},
+  low: {label:'Baixo', color:'var(--teal)', text:'var(--muted)'}
+};
+
+const REFS = [
+  {t:'Emenda Constitucional nº 132/2023', s:'Planalto · texto oficial', u:'https://www.planalto.gov.br/ccivil_03/constituicao/emendas/emc/emc132.htm'},
+  {t:'Lei Complementar nº 214/2025', s:'Planalto · texto oficial', u:'https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp214.htm'},
+  {t:'Nota Técnica 2025.002 (NF-e/NFC-e) e demais NTs', s:'Portal Nacional da NF-e · documentos oficiais', u:'https://www.nfe.fazenda.gov.br/portal/listaConteudo.aspx?tipoConteudo=04BIflQt1aY%3D'},
+  {t:'NT 2025.002 v1.52: IBS/CBS em produção adiado', s:'Tax360 · atualizado em 20/11/2026', u:'https://www.tax360.com.br/conteudo/nt-nfe-nfce-2025-002-rtc-v152'},
+  {t:'NT 2025.002 v1.52: o que mudou na NF-e e NFC-e', s:'Retributária · 06/10/2026', u:'https://retributaria.com/nt-2025-002-v1-52-nfe-ibs-cbs/'},
+  {t:'Obrigação de CBS e IBS avança, mas rejeição automática foi adiada', s:'SMN Advogados · 21/09/2026', u:'https://www.smnadv.com.br/reforma-tributaria-em-agosto-de-2026-obrigacao-de-cbs-e-ibs-avanca-mas-rejeicao-automatica-foi-adiada/'},
+  {t:'IBS e CBS nos documentos fiscais: as 4 ondas de 2026', s:'Contmatic · atualizado em 17/09/2026', u:'https://simplifique.contmatic.com.br/blogs/obrigatoriedade-ibs-cbs-documentos-fiscais-4-ondas-2026'},
+  {t:'Quando os campos de IBS e CBS na NFS-e passam a ser obrigatórios', s:'Actana · 13/05/2026', u:'https://actana.com.br/reforma-tributaria-nfse-quando-obrigatorio'},
+  {t:'Lei Complementar 227/2026 regulamenta Comitê do IBS', s:'Contábeis · 15/01/2026', u:'https://www.contabeis.com.br/noticias/74668/lei-complementar-227-2026-regulamenta-comite-do-ibs/'},
+  {t:'Sanção da LC nº 227/2026 que institui o Comitê Gestor do IBS', s:'TOTVS', u:'https://www.totvs.com/blog/fiscal-clientes/reforma-tributaria-do-consumo-avanca-com-a-sancao-da-lei-complementar-no-227-2026-que-institui-o-comite-gestor-do-ibs/'},
+  {t:'Nota Técnica 2025.002 IBS/CBS/IS na NF-e e NFC-e', s:'Tecnospeed', u:'https://blog.tecnospeed.com.br/nota-tecnica-reforma-tributaria-nfe-nfce/'},
+  {t:'Cronograma da reforma tributária: transição de 2026 a 2033', s:'Barbieri Advogados', u:'https://www.barbieriadvogados.com/transicao-tributaria-2026/'}
+];
+
+// date: ISO; label overrides display
+const ITEMS = [
+  {date:'2023-12-20', cat:'Lei', title:'Emenda Constitucional 132/2023', status:'done', impact:'high', refs:[1],
+   desc:'Muda a Constituição para trocar cinco tributos sobre consumo (PIS, Cofins, IPI, ICMS e ISS) por três novos: CBS (federal), IBS (estados e municípios) e Imposto Seletivo.',
+   imp:'Define a direção de tudo o que vem depois. Exige planejamento de longo prazo em sistemas, preços e contratos.', docs:[]},
+  {date:'2025-01-16', cat:'Lei', title:'Lei Complementar 214/2025', status:'done', impact:'crit', refs:[2],
+   desc:'É a “lei do novo imposto”: diz quem paga IBS, CBS e Imposto Seletivo, como calcular, quais setores têm redução, como funciona o crédito e o cronograma de transição.',
+   imp:'Base de todas as regras de cálculo que os sistemas fiscais precisam implementar.', docs:[]},
+  {date:'2026-01-01', cat:'Transição', title:'Ano-teste: CBS 0,9% e IBS 0,1% destacados', status:'prog', impact:'high', refs:[6,7,12],
+   desc:'Em 2026 os novos tributos aparecem nas notas com alíquota de teste (1% no total). Quem cumpre as obrigações acessórias fica dispensado de recolher esse valor.',
+   imp:'Não pesa no caixa, mas o sistema precisa calcular e informar corretamente. Serve de ensaio para 2027.', docs:['NF-e','NFC-e','NFS-e']},
+  {date:'2026-01-13', cat:'Lei', title:'Lei Complementar 227/2026 (Comitê Gestor do IBS)', status:'done', impact:'med', refs:[9,10],
+   desc:'Cria o Comitê Gestor do IBS, órgão que vai administrar o imposto em nome de estados e municípios, e define o processo de cobrança e divisão do dinheiro arrecadado.',
+   imp:'Passa a existir um único interlocutor para o IBS. Afeta fiscalização, contencioso e normas futuras.', docs:[]},
+  {date:'2026-07-30', cat:'Cronograma', title:'Ato Conjunto RFB/CGIBS nº 4/2026: cronograma em 4 ondas', status:'done', impact:'high', refs:[7],
+   desc:'Publicou o calendário oficial de quando cada documento fiscal passa a exigir os campos de IBS e CBS, divididos em quatro ondas entre agosto de 2026 e janeiro de 2027.',
+   imp:'É o calendário de referência para o planejamento de entregas de produto.', docs:[]},
+  {date:'2026-07-31', cat:'Norma técnica', title:'Ato Técnico Conjunto nº 1/2026: rejeição automática suspensa', status:'watch', impact:'high', refs:[6,5,7],
+   desc:'A Sefaz não vai rejeitar notas sem os campos de IBS/CBS por enquanto. A obrigação de informar continua; apenas o bloqueio automático foi adiado, sem nova data.',
+   imp:'Dá fôlego, mas a data de volta da rejeição pode sair a qualquer momento. Notas sem IBS/CBS hoje ficam como pendência de conformidade.', docs:['NF-e','NFC-e','CT-e','BP-e','NF3e','NFCom']},
+  {date:'2026-08-03', cat:'Cronograma', title:'1ª onda: IBS/CBS obrigatórios na NF-e e NFC-e', status:'done', impact:'crit', refs:[7,6],
+   desc:'Empresas do regime normal (Lucro Real e Presumido) passam a informar IBS e CBS nas notas de produto, de consumidor e de transporte.',
+   imp:'Principal demanda para ERP e PDV de varejo: cálculo, novos grupos no XML e classificação tributária por item.', docs:['NF-e','NFC-e','CT-e','MDF-e','NF3e','BP-e','DC-e','GTV-e']},
+  {date:'2026-08-12', cat:'Cronograma', title:'Programa Nacional de Conformidade 2026', status:'prog', impact:'med', refs:[6], until:'2026-12-31',
+   desc:'Período em que a empresa pode corrigir erros no preenchimento de IBS e CBS sem multa. O prazo para corrigir inconsistências vai até 31/12/2026.',
+   imp:'Janela para ajustar cadastros e regras fiscais antes da cobrança real em 2027.', docs:[]},
+  {date:'2026-10-01', cat:'Cronograma', title:'2ª onda: NFS-e, NFCom e DeRE (1ª fase)', status:'done', impact:'med', refs:[7,8],
+   desc:'Notas de serviço em geral, notas de telecomunicação e o cadastro inicial na nova declaração de regimes específicos (DeRE) passam a exigir as informações.',
+   imp:'Relevante para quem emite nota de serviço junto com venda de produto (instalação, garantia estendida, assinaturas).', docs:['NFS-e','NFCom','DeRE']},
+  {date:'2026-10-05', cat:'Norma técnica', title:'NT 2025.002 v1.51: devoluções, créditos e débitos', status:'done', impact:'high', refs:[3,4],
+   desc:'Novas regras para notas de devolução, notas de crédito e notas de débito (como pagamento antecipado e perda em estoque) e alíquota zero de CBS na Zona Franca e áreas de livre comércio.',
+   imp:'Mexe em fluxos comuns no varejo: troca, devolução e ajuste de estoque.', docs:['NF-e','NFC-e']},
+  {date:'2026-11-15', cat:'Cronograma', title:'DeRE 2ª fase: primeira entrega mensal', status:'done', impact:'low', refs:[7],
+   desc:'Primeira entrega mensal da declaração de regimes específicos, referente a outubro de 2026. As próximas vencem no dia 15 de cada mês.',
+   imp:'Afeta só empresas em regimes específicos (ex.: combustíveis, financeiro). Baixo impacto no varejo comum.', docs:['DeRE']},
+  {date:'2026-11-16', cat:'Norma técnica', title:'NT 2025.002 v1.52/v1.53 em produção', status:'done', impact:'high', refs:[4,5,3],
+   desc:'Devoluções devem apontar a nota original item a item, a validação de destinatário fica mais precisa e entra o novo leiaute de produtos com imposto monofásico (como combustíveis).',
+   imp:'Ajuste na rotina de devolução do ERP e do PDV. A v1.53 (30/10) flexibilizou a referência, mas vale revisar os fluxos.', docs:['NF-e','NFC-e']},
+  {date:'2026-12-01', cat:'Cronograma', title:'3ª onda: novos casos de NF-e e NFS-e', status:'todo', impact:'med', refs:[7],
+   desc:'Entram venda de imóveis, contas de água e gás, NFS-e de plataformas digitais, NF-e de quem paga IBS/CBS mas não é contribuinte de ICMS e bilhetes aéreos.',
+   imp:'Pode afetar clientes com marketplace ou locação de espaço. Verificar quem se enquadra.', docs:['NF-e','NFS-e','BP-e','NFAg','NFGas']},
+  {date:'2027-01-01', cat:'Cronograma', title:'4ª onda: Simples Nacional, importação e combustíveis', status:'todo', impact:'crit', refs:[7,8],
+   desc:'Empresas do Simples Nacional e MEI passam a informar IBS e CBS nas notas. Entram também importação (Duimp e NF-e de importação), combustíveis monofásicos e a 3ª fase da DeRE.',
+   imp:'Grande volume de lojistas da base são do Simples. Exige cadastro tributário revisado e atualização do PDV antes da virada do ano.', docs:['NF-e','NFC-e','CT-e','NFS-e','Duimp']},
+  {date:'2027-01-01', cat:'Transição', title:'CBS passa a ser cobrada; PIS e Cofins acabam', status:'todo', impact:'crit', refs:[1,2,6],
+   desc:'A CBS deixa de ser teste e é cobrada de verdade. PIS e Cofins deixam de existir, o IPI vai a zero (exceto Zona Franca) e começa o Imposto Seletivo. O IBS segue em 0,1%.',
+   imp:'Muda preço, margem, crédito e fluxo de caixa. Cálculo errado vira imposto a pagar ou crédito perdido.', docs:['NF-e','NFC-e','NFS-e']},
+  {date:'2027-01-01', cat:'Norma técnica', title:'NT 2026.008: valor líquido sem IBS/CBS/IS no produto', status:'todo', impact:'high', refs:[4,3],
+   desc:'A partir de 2027 os novos tributos ficam fora do valor do produto na nota. A nota passa a mostrar o valor líquido e os impostos separados.',
+   imp:'Altera a composição do total da nota, a impressão do cupom e os relatórios de venda.', docs:['NF-e','NFC-e'], approx:true},
+  {date:'2027-01-04', cat:'Norma técnica', title:'Rejeição 1115 (IBS/CBS não informado)', status:'watch', impact:'high', refs:[4,8],
+   desc:'Regra que recusa a nota sem IBS/CBS. Estava prevista para janeiro de 2027 no Simples, mas a NT v1.51 a colocou como “implementação futura”, sem data.',
+   imp:'Quando voltar a valer, nota sem os campos será recusada e a venda para. Acompanhar comunicados da Sefaz.', docs:['NF-e','NFC-e','NFS-e'], label:'Sem data'},
+  {date:'2026-12-31', cat:'Norma técnica', title:'NT 2026.010: novo DANFE da reforma', status:'watch', impact:'med', refs:[4,3],
+   desc:'Novo modelo da representação impressa da nota (DANFE) com os campos da reforma.',
+   imp:'Ajuste de layout de impressão no ERP e PDV. Data de vigência a confirmar no portal.', docs:['NF-e','NFC-e'], label:'A confirmar'},
+  {date:'2029-01-01', cat:'Transição', title:'Início da redução de ICMS e ISS', status:'todo', impact:'med', refs:[1,7,12],
+   desc:'ICMS e ISS caem 10% por ano (para 90% em 2029 até 60% em 2032), enquanto o IBS sobe na mesma proporção.',
+   imp:'Sistemas convivem com os dois modelos ao mesmo tempo por quatro anos.', docs:[], label:'2029–2032'},
+  {date:'2033-01-01', cat:'Transição', title:'Fim do ICMS e do ISS', status:'todo', impact:'high', refs:[1,12],
+   desc:'O modelo novo passa a valer por completo: só CBS, IBS e Imposto Seletivo.',
+   imp:'Desativação das regras antigas de ICMS/ISS e simplificação do cadastro fiscal.', docs:[]}
+];
+
+const fmt = d => new Date(d+'T12:00:00-03:00').toLocaleDateString('pt-BR',{day:'2-digit',month:'short',year:'numeric'}).replace(/ de /g,' ').replace('.','');
+const dayDiff = d => Math.round((new Date(d+'T12:00:00-03:00') - TODAY)/864e5);
+function rel(it){
+  if(it.label) return it.label==='A confirmar'||it.label==='Sem data' ? 'data a definir' : '';
+  const n = dayDiff(it.date);
+  if(n===0) return 'hoje';
+  if(n>0) return n<=90 ? `em ${n} dias` : `em ${Math.round(n/30)} meses`;
+  return n>-60 ? `há ${-n} dias` : '';
+}
+const pct = (a,b) => Math.round(a/b*100);
+const pill = (o,label) => `<span class="pill" style="background:color-mix(in srgb, ${o.color} 14%, transparent);color:${o.text}"><i style="background:${o.color}"></i>${label||o.label}</span>`;
+
+// KPIs
+const total = ITEMS.length;
+const cnt = k => ITEMS.filter(i=>i.status===k).length;
+const cntI = k => ITEMS.filter(i=>i.impact===k).length;
+document.getElementById('k-total').textContent = total;
+document.getElementById('k-done').textContent = pct(cnt('done'),total)+'%';
+document.getElementById('k-done-sub').textContent = `${cnt('done')} de ${total} itens`;
+const hi = cntI('crit')+cntI('high');
+document.getElementById('k-high').textContent = pct(hi,total)+'%';
+document.getElementById('k-high-sub').textContent = `${hi} itens exigem prioridade`;
+const next = ITEMS.filter(i=>!i.label && dayDiff(i.date)>0).sort((a,b)=>a.date.localeCompare(b.date))[0];
+if(next){document.getElementById('k-next').textContent = fmt(next.date); document.getElementById('k-next-sub').textContent = `${next.title.split(':')[0]} · ${rel(next)}`;}
+
+// Donut
+const R=48, C=2*Math.PI*R; let off=0, g='';
+g += `<circle cx="60" cy="60" r="${R}" fill="none" stroke="var(--fill)" stroke-width="14"/>`;
+Object.entries(STATUS).forEach(([k,o])=>{
+  const n=cnt(k); if(!n) return; const len=n/total*C;
+  g += `<circle cx="60" cy="60" r="${R}" fill="none" stroke="${o.color}" stroke-width="14" stroke-dasharray="${Math.max(len-1.5,0)} ${C}" stroke-dashoffset="${-off}"><title>${o.label}: ${pct(n,total)}%</title></circle>`;
+  off+=len;
+});
+document.getElementById('donut').innerHTML=g;
+document.getElementById('donut-pct').textContent = pct(cnt('done'),total)+'%';
+document.getElementById('legend-status').innerHTML = Object.entries(STATUS).map(([k,o])=>`<div class="lg"><i style="background:${o.color}"></i><span>${o.label}</span><b>${pct(cnt(k),total)}%<span class="n">${cnt(k)}</span></b></div>`).join('');
+
+// Impact bars
+document.getElementById('bars-impact').innerHTML = Object.entries(IMPACT).map(([k,o])=>{
+  const p=pct(cntI(k),total);
+  return `<div class="bar"><div class="top"><span>${o.label} <span style="color:var(--muted)">· ${cntI(k)} ${cntI(k)===1?'item':'itens'}</span></span><b>${p}%</b></div><div class="track"><span style="width:${p}%;background:${o.color}"></span></div></div>`;
+}).join('');
+
+// Progress
+const t0=new Date('2026-01-01T00:00:00-03:00'), t1=new Date('2033-01-01T00:00:00-03:00');
+const pt = Math.round((TODAY-t0)/(t1-t0)*100);
+document.getElementById('p-time').textContent=pt+'%'; document.getElementById('p-time-bar').style.width=pt+'%';
+const y26 = ITEMS.filter(i=>i.date.startsWith('2026') && !i.label);
+const y26d = y26.filter(i=>dayDiff(i.date)<=0).length;
+const p26 = pct(y26d,y26.length);
+document.getElementById('p-2026').textContent=`${p26}% (${y26d} de ${y26.length})`; document.getElementById('p-2026-bar').style.width=p26+'%';
+
+// Filters + timeline
+let filter='all', query='';
+const segOpts=[['all','Todos'],...Object.entries(STATUS).map(([k,o])=>[k,o.label])];
+const seg=document.getElementById('seg');
+seg.innerHTML=segOpts.map(([k,l])=>`<button type="button" data-k="${k}" aria-pressed="${k==='all'}">${l} <span style="color:var(--muted)">${k==='all'?total:cnt(k)}</span></button>`).join('');
+seg.addEventListener('click',e=>{const b=e.target.closest('button'); if(!b) return; filter=b.dataset.k; seg.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b)); render();});
+document.getElementById('q').addEventListener('input',e=>{query=e.target.value.toLowerCase().trim(); render();});
+
+function render(){
+  const list = ITEMS.filter(i=>(filter==='all'||i.status===filter) && (!query || (i.title+' '+i.desc+' '+i.imp+' '+i.docs.join(' ')+' '+i.cat).toLowerCase().includes(query)))
+    .sort((a,b)=>a.date.localeCompare(b.date));
+  const el=document.getElementById('timeline');
+  if(!list.length){el.innerHTML='<div class="card empty">Nenhum item corresponde ao filtro.</div>';return;}
+  const byYear={}; list.forEach(i=>{const y=i.label==='2029–2032'?'2029–2032':i.date.slice(0,4); (byYear[y]=byYear[y]||[]).push(i);});
+  el.innerHTML=Object.entries(byYear).map(([y,arr])=>`<div class="year">${y}</div><div class="card list">${arr.map(i=>`
+    <article class="item">
+      <div class="when"><div class="d">${i.label||fmt(i.date)}</div><div class="rel">${i.until?'até '+fmt(i.until):rel(i)}</div></div>
+      <div class="body">
+        <div class="titlerow"><h4>${i.title}</h4>${pill(STATUS[i.status])}</div>
+        <div class="cat">${i.cat}${i.approx?' · vigência a partir de 2027, data exata a confirmar':''}</div>
+        <p>${i.desc}</p>
+        <div class="impact">${pill(IMPACT[i.impact],'Impacto '+IMPACT[i.impact].label.toLowerCase())} <strong style="margin-left:6px">O que muda para nós:</strong> ${i.imp}</div>
+        <div class="meta">${i.docs.length?`<div class="docs">${i.docs.map(d=>`<span class="doc">${d}</span>`).join('')}</div>`:''}<span>Fontes: ${i.refs.map(r=>`<a href="#ref-${r}">[${r}]</a>`).join(' ')}</span></div>
+      </div>
+    </article>`).join('')}</div>`).join('');
+}
+render();
+
+document.getElementById('refs').innerHTML = REFS.map((r,i)=>`<div class="ref" id="ref-${i+1}"><span class="k">[${i+1}]</span><div><a href="${r.u}" target="_blank" rel="noopener">${r.t}</a><div class="s">${r.s}</div></div></div>`).join('');
+</script>
+
+</body></html>

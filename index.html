@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Painel da Reforma Tributária</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+:root{--color-bg:#f9f9f7;--color-fg:#0b0b0b;--color-border-line:hsl(from #0b0b0b h s l / 10%);--color-fg-muted:#898781;--font-anthropic-sans:"Anthropic Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;--cds-chart-categorical-1:#2a78d6;--cds-chart-categorical-2:#eb6834;--cds-gap-xl:calc(2.5rem * 1);--cds-gap-sm:calc(.75rem * 1);--cds-pad-md:calc(.75rem * 1);--cds-font-size-caption:calc(.75rem * 1);--cds-gap-md:calc(1rem * 1);--color-panel:#fff;--cds-radius:calc(.5rem * 1);--cds-pad-lg:calc(1rem * 1);--color-ok:#006300;--color-bad:#8e2626;--color-warn:#734500;--cds-font-size-body:calc(.875rem * 1);--cds-font-size-heading:calc(.9375rem * 1);--cds-text-secondary:#52514e;--cds-surface-popover:#fff;--cds-border:hsl(from #0b0b0b h s l / 10%);--cds-shadow-popover:0 8px 24px #0000001f, 0 2px 6px #00000014;--cds-chart-muted:#c3c2b7;--cds-chart-grid:hsl(from #0b0b0b h s l / 10%)}
+@media (prefers-color-scheme:dark){:root{--color-bg:#0b0b0b;--color-fg:#f0efec;--color-border-line:hsl(from #fff h s l / 10%);--color-fg-muted:#898781;--font-anthropic-sans:"Anthropic Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;--cds-chart-categorical-1:#3987e5;--cds-chart-categorical-2:#d95926;--cds-gap-xl:calc(2.5rem * 1);--cds-gap-sm:calc(.75rem * 1);--cds-pad-md:calc(.75rem * 1);--cds-font-size-caption:calc(.75rem * 1);--cds-gap-md:calc(1rem * 1);--color-panel:#1a1a19;--cds-radius:calc(.5rem * 1);--cds-pad-lg:calc(1rem * 1);--color-ok:#0ca30c;--color-bad:#ec7e7e;--color-warn:#db9300;--cds-font-size-body:calc(.875rem * 1);--cds-font-size-heading:calc(.9375rem * 1);--cds-text-secondary:#c3c2b7;--cds-surface-popover:#20201f;--cds-border:hsl(from #fff h s l / 10%);--cds-shadow-popover:0 8px 24px #00000052, 0 2px 6px #0003;--cds-chart-muted:#5f5e5a;--cds-chart-grid:hsl(from #fff h s l / 10%)}body{background:#0b0b0b}}
+html{-webkit-text-size-adjust:100%}
+#dash-root{color:var(--color-fg);font-size:14px;line-height:1.45;font-family:ui-sans-serif,system-ui,-apple-system,sans-serif}
+#dash-root select{appearance:none;-webkit-appearance:none;background:var(--color-panel) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 20 20'%3E%3Cpath fill='%23808080' d='M14.128 7.165a.502.502 0 0 1 .744.67l-4.5 5-.078.07a.5.5 0 0 1-.666-.07l-4.5-5-.06-.082a.501.501 0 0 1 .729-.656l.075.068L10 11.752z'/%3E%3C/svg%3E") no-repeat right 8px center;border:1px solid var(--color-border-line);border-radius:8px;padding:4.9px 28px 4.9px 10.5px;font:inherit;font-size:14px;color:var(--color-fg);height:32px}
+:where(#dash-root) table{color:inherit;font-family:inherit}
+</style>
+<script>(function(){const h=document.documentElement;h.classList.add("cds-root");const sync=()=>{const t=h.getAttribute("data-theme");const m=t==="dark"||t==="light"?t:"system";if(h.getAttribute("data-mode")!==m)h.setAttribute("data-mode",m);};sync();new MutationObserver(sync).observe(h,{attributes:true,attributeFilter:["data-theme"]});})();</script>
+<style>
+body{margin:0;background:#fff}
+@media (prefers-color-scheme: dark){body{background:#1f1e1d}}
+.rt-shell{background:var(--color-bg);color:var(--color-fg);min-height:100vh}
+.rt-upd{font-weight:500}
+[hidden]{display:none!important}
+.rt-shell #dash-root{padding:clamp(16px,2.5vw,40px)}
+.rt-shell .rt{max-width:1680px;width:100%}
+.rt-shell .rt-grid2{grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr))}
+.rt-shell .rt-table{min-width:640px}
+@media (max-width:640px){.rt-shell .rt-table{min-width:0}.rt-shell .rt-table thead{display:none}.rt-shell .rt-table,.rt-shell .rt-table tbody,.rt-shell .rt-table tr,.rt-shell .rt-table td{display:block;width:100%;box-sizing:border-box}.rt-shell .rt-table tr{padding:12px 0;border-bottom:1px solid var(--color-border-line)}.rt-shell .rt-table tr:last-child{border-bottom:0}.rt-shell .rt-table td{border:0;padding:3px 0;text-align:left!important;display:flex;gap:10px;align-items:baseline}.rt-shell .rt-table td:first-child{font-weight:600;display:block;padding-bottom:6px}.rt-shell .rt-table td:not(:first-child)::before{flex:0 0 112px;font-size:11.5px;font-weight:600;color:var(--color-fg-muted)}.rt-shell .rt-table td:nth-child(2)::before{content:"Produto"}.rt-shell .rt-table td:nth-child(3)::before{content:"Situação"}.rt-shell .rt-table td:nth-child(4)::before{content:"Urgência"}.rt-shell .rt-table td:nth-child(5)::before{content:"Data p/ Produção"}.rt-shell .rt-table td:nth-child(6)::before{content:"Código no Jira"}.rt-shell .rt-table td:nth-child(5) *{text-align:left!important;margin-left:0!important;justify-content:flex-start!important;align-items:flex-start!important;justify-items:start!important}.rt-shell .rt-table td::before{font-family:-apple-system,BlinkMacSystemFont,var(--font-anthropic-sans)}.rt-shell .rt-tw{max-height:640px}.rt-shell #dash-root{padding:12px}.rt-shell .rt-card{padding:16px}.rt-shell .rt{gap:20px}}
+:focus-visible{outline:3px solid var(--cds-chart-categorical-1);outline-offset:2px;border-radius:6px}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script src="dados.js"></script>
+<script>
+(function(){
+  const D = window.__DADOS || {};
+  const brutos = { fluxo: D.jira, pendentes: D.jira, urgentes: D.jira, historico: D.historico || [], prazos: D.prazos || [], produtos: D.produtos || [] };
+  const loaders = {}, calcs = {}, draws = {}, onDatas = [], cache = {};
+  let params = {};
+  try { const h = decodeURIComponent(location.hash.slice(1)); if (h.startsWith('f=')) params = JSON.parse(h.slice(2)) || {}; } catch (e) {}
+  const ok = (data) => ({ status: 'ok', data, columns: data && data[0] ? Object.keys(data[0]) : [], refreshing: false, truncated: false });
+  function data(id){
+    if (cache[id]) return cache[id];
+    let r;
+    if (calcs[id]) { const c = calcs[id]; r = ok(c.fn(...c.inputs.map((i) => data(i).data))); }
+    else if (id in brutos) {
+      let v = brutos[id];
+      if (loaders[id]) { const out = loaders[id].fn({ answer: v }); v = Array.isArray(out) ? out : (out.rows || out.data || []); }
+      r = ok(v);
+    } else r = { status: 'missing', data: [] };
+    return (cache[id] = r);
+  }
+  function render(){
+    for (const k in cache) delete cache[k];
+    onDatas.forEach((f) => { try { f(); } catch (e) { console.error(e); } });
+    Object.entries(draws).forEach(([n, f]) => document.querySelectorAll('[data-draw="' + n + '"]').forEach((el) => { try { f(el); } catch (e) { console.error(n, e); } }));
+  }
+  let pronto = false;
+  window.dash = {
+    loader: (id, o) => { loaders[id] = o; },
+    calc: (id, o) => { calcs[id] = o; },
+    data,
+    draw: (n, f) => { if (typeof f === 'function') draws[n] = f; else if (draws[n]) document.querySelectorAll('[data-draw="' + n + '"]').forEach((el) => draws[n](el)); },
+    onData: (f) => { onDatas.push(f); },
+    params: () => ({ ...params }),
+    setParams: (o) => { Object.entries(o).forEach(([k, v]) => { if (v === null || v === undefined || v === '') delete params[k]; else params[k] = v; });
+      try { history.replaceState(null, '', Object.keys(params).length ? '#f=' + encodeURIComponent(JSON.stringify(params)) : location.pathname); } catch (e) {}
+      if (pronto) render(); },
+    resetParams: () => { params = {}; if (pronto) render(); },
+    setLink: () => {}, refresh: () => {}, colors: ['var(--cds-chart-categorical-1)', 'var(--cds-chart-categorical-2)']
+  };
+  window.addEventListener('DOMContentLoaded', () => {
+    dash.draw('atualizado', (el) => { const g = D.gerado || ''; el.textContent = g ? 'atualizado em ' + g.slice(8, 10) + '/' + g.slice(5, 7) + '/' + g.slice(0, 4) + (g.length > 10 ? ' às ' + g.slice(11, 16) : '') : ''; });
+    pronto = true; render();
+    let w = window.innerWidth; window.addEventListener('resize', () => { if (Math.abs(window.innerWidth - w) > 20) { w = window.innerWidth; render(); } });
+  });
+})();
+</script>
+</head>
+<body>
+<div class="rt-shell"><div id="dash-root"><style>
+.rt{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text",var(--font-anthropic-sans);color:var(--color-fg);display:grid;gap:var(--cds-gap-xl);max-width:1120px;margin:0 auto}
+.rt-head{display:grid;gap:var(--cds-gap-sm);padding-top:var(--cds-pad-md)}
+.rt-eyebrow{font-size:var(--cds-font-size-caption);font-weight:600;color:var(--color-fg-muted);letter-spacing:.02em}
+.rt-title{font-size:clamp(30px,5vw,46px);line-height:1.05;letter-spacing:-.03em;font-weight:700;margin:0}
+.rt-lede{font-size:clamp(16px,2vw,19px);color:var(--color-fg-muted);margin:0;max-width:64ch;line-height:1.45}
+.rt-lede b{color:var(--color-fg);font-weight:600}
+.rt-filters{position:sticky;top:0;z-index:3;display:flex;flex-wrap:wrap;gap:var(--cds-gap-md);align-items:end;padding:var(--cds-pad-md);background:var(--color-panel);border:1px solid var(--color-border-line);border-radius:calc(var(--cds-radius) * 2)}
+.rt-field{display:grid;gap:6px;min-width:0}
+.rt-field label,.rt-field .rt-flabel{font-size:12px;font-weight:600;color:var(--color-fg-muted)}
+.rt-field select{min-width:220px;max-width:100%}
+.rt-seg{display:inline-flex;flex-wrap:wrap;background:var(--color-bg);border:1px solid var(--color-border-line);border-radius:10px;padding:3px;gap:2px}
+.rt-seg button{font:inherit;font-size:13px;font-weight:500;color:var(--color-fg);background:transparent;border:0;border-radius:8px;padding:6px 12px;cursor:pointer}
+.rt-seg button[aria-pressed="true"]{background:var(--color-panel);box-shadow:0 1px 3px rgba(0,0,0,.14);font-weight:600}
+.rt-dates{display:flex;gap:var(--cds-gap-sm);flex-wrap:wrap}
+.rt-dates input{font:inherit;font-size:13px;padding:6px 8px;border:1px solid var(--color-border-line);border-radius:8px;background:var(--color-bg);color:var(--color-fg)}
+.rt-tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:var(--cds-gap-md)}
+.rt-card{background:var(--color-panel);border:1px solid var(--color-border-line);border-radius:calc(var(--cds-radius) * 2);padding:var(--cds-pad-lg);min-width:0}
+.rt-tile{display:grid;gap:4px;align-content:start}
+.rt-tile .rt-l{font-size:13px;font-weight:600}
+.rt-tile .rt-n{font-size:clamp(30px,4vw,40px);font-weight:700;letter-spacing:-.035em;line-height:1.05;font-variant-numeric:tabular-nums}
+.rt-tile .rt-s{font-size:12px;color:var(--color-fg-muted)}
+.rt-ok{color:var(--color-ok)} .rt-bad{color:var(--color-bad)} .rt-warn{color:var(--color-warn)}
+.rt-sec{display:grid;gap:var(--cds-gap-md)}
+.rt-h2{font-size:clamp(22px,3vw,28px);letter-spacing:-.02em;font-weight:700;margin:0}
+.rt-sub{margin:4px 0 0;color:var(--color-fg-muted);font-size:var(--cds-font-size-body)}
+.rt-h3{font-size:var(--cds-font-size-heading);font-weight:600;margin:0 0 4px}
+.rt-help{font-size:12px;color:var(--color-fg-muted);margin:0 0 var(--cds-gap-md)}
+.rt-grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:var(--cds-gap-md)}
+.rt-chart{position:relative;min-height:240px}
+.rt-chart svg{display:block;width:100%;height:auto}
+.rt-chart text{font-family:inherit;font-size:11px;fill:var(--cds-text-secondary)}
+.rt-keys{display:flex;flex-wrap:wrap;gap:var(--cds-gap-md);font-size:12px;color:var(--color-fg-muted);margin-bottom:var(--cds-gap-sm)}
+.rt-keys span{display:inline-flex;align-items:center;gap:6px}
+.rt-keys i{width:10px;height:10px;border-radius:3px;display:inline-block}
+.rt-tip{position:absolute;pointer-events:none;background:var(--cds-surface-popover);border:1px solid var(--cds-border);box-shadow:var(--cds-shadow-popover);border-radius:10px;padding:8px 10px;font-size:12px;line-height:1.4;white-space:nowrap;z-index:2}
+.rt-bars{display:grid;gap:10px;min-height:100px}
+.rt-bar{display:grid;grid-template-columns:minmax(100px,190px) minmax(0,1fr) 64px;gap:10px;align-items:center;font-size:13px}
+.rt-bar .rt-nm{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rt-bar .rt-v{text-align:right;font-variant-numeric:tabular-nums;color:var(--color-fg-muted)}
+.rt-bar .rt-v b{color:var(--color-fg);font-weight:600}
+.rt-bar.rt-click{cursor:pointer}
+.rt-bar.rt-click:hover .rt-nm{text-decoration:underline}
+.rt-track{height:12px;border-radius:99px;background:var(--color-border-line);display:flex;overflow:hidden}
+.rt-track span{height:100%}
+.rt-dl{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));gap:var(--cds-gap-md)}
+.rt-dl .rt-card{display:grid;gap:6px;align-content:start}
+.rt-dl .rt-d{font-size:12px;font-weight:600;color:var(--color-fg-muted)}
+.rt-dl .rt-t{font-weight:600;font-size:16px;letter-spacing:-.01em}
+.rt-dl p{margin:0;font-size:13px;color:var(--color-fg-muted)}
+.rt-dl .rt-cd{font-size:28px;font-weight:700;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.rt-key{outline:2px solid var(--color-bad);outline-offset:-2px}
+.rt-tw{overflow-x:auto;max-height:520px;overflow-y:auto}
+.rt-table{width:100%;border-collapse:collapse;font-size:13px}
+.rt-table th{position:sticky;top:0;background:var(--color-panel);text-align:left;font-size:12px;font-weight:600;color:var(--color-fg-muted);padding:8px 10px;border-bottom:1px solid var(--color-border-line);white-space:nowrap}
+.rt-table td{padding:10px;border-bottom:1px solid var(--color-border-line);vertical-align:top}
+.rt-table tr:last-child td{border-bottom:0}
+.rt-table td.rt-k{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:12px;color:var(--color-fg-muted);white-space:nowrap}
+.rt-pill{display:inline-block;font-size:11.5px;font-weight:600;padding:2px 9px;border-radius:99px;white-space:nowrap;background:color-mix(in srgb,currentColor 13%,transparent)}
+.rt-tfilters{display:flex;flex-wrap:wrap;gap:var(--cds-gap-md);align-items:end}
+.rt-tfilters .rt-field select{min-width:200px}
+.rt-date{font:inherit;font-size:12.5px;padding:4px 6px;border:1px solid var(--color-border-line);border-radius:8px;background:var(--color-bg);color:var(--color-fg)}
+.rt-due{display:grid;gap:4px;justify-items:center;text-align:center}
+.rt-table th.rt-center,.rt-table td.rt-center{text-align:center}
+.rt-msg{font-size:13px;margin:0}
+.rt-src{position:relative;display:inline-block}
+.rt-src-btn{font:inherit;font-size:11.5px;font-weight:600;color:var(--cds-chart-categorical-1, #0071e3);background:none;border:0;padding:2px 4px;cursor:pointer;border-radius:6px}
+.rt-src-btn:hover{text-decoration:underline}
+.rt-src-pop{display:none;position:absolute;z-index:5;top:calc(100% + 6px);left:50%;transform:translateX(-50%);width:260px;max-width:70vw;background:var(--cds-surface-popover);border:1px solid var(--cds-border);box-shadow:var(--cds-shadow-popover);border-radius:12px;padding:10px 12px;font-size:12px;line-height:1.45;text-align:left;white-space:normal;color:var(--color-fg)}
+.rt-src-pop b{display:block;margin-bottom:2px}
+.rt-src-pop span{display:block;color:var(--color-fg-muted)}
+.rt-src-pop a{display:inline-block;margin-top:6px;font-weight:600;color:var(--cds-chart-categorical-1, #0071e3)}
+.rt-src:hover .rt-src-pop,.rt-src:focus-within .rt-src-pop,.rt-src.rt-open .rt-src-pop{display:block}
+.rt-norma{font-size:11.5px;color:var(--color-fg-muted);max-width:220px;text-align:center}
+.rt-foot{font-size:12px;color:var(--color-fg-muted);margin:0}
+.rt-gloss{font-size:14px}
+.rt-gloss summary{cursor:pointer;font-weight:600}
+.rt-gloss dl{display:grid;grid-template-columns:minmax(120px,200px) 1fr;gap:8px 16px;margin:var(--cds-gap-md) 0 0}
+.rt-gloss dt{font-weight:600}
+.rt-gloss dd{margin:0;color:var(--color-fg-muted)}
+@media (max-width:560px){.rt-gloss dl{grid-template-columns:1fr}.rt-field select{min-width:0;width:100%}.rt-filters{position:static}}
+</style>
+
+<div class="rt">
+  <header class="rt-head" id="topo">
+    <div class="rt-eyebrow">Reforma Tributária · <span data-draw="nome-prod">—</span> · <span class="rt-upd" data-draw="atualizado">—</span></div>
+    <h1 class="rt-title">Como estamos na Reforma Tributária</h1>
+    <p class="rt-lede">Nos <span data-draw="periodo-txt">—</span>, chegaram <b data-draw="l-cheg" data-source="resumo" data-field="chegaram" data-row="0" class="dash-skeleton"></b> pedidos de ajuste e <b data-draw="l-res" data-source="resumo" data-field="resolvidos" data-row="0" class="dash-skeleton"></b> foram resolvidos. Hoje há <b data-draw="l-pen" data-source="resumo" data-field="pendentes" data-row="0" class="dash-skeleton"></b> pedidos pendentes, e <b data-draw="l-urg" data-source="resumo" data-field="urgentes" data-row="0" class="dash-skeleton"></b> deles são urgentes.</p>
+  </header>
+
+  <section class="rt-filters" id="filtros" aria-label="Filtros">
+    <div class="rt-field">
+      <label for="f-produto">Produto</label>
+      <select class="dash-select" id="f-produto" data-draw="produto-sel" data-source="produtos"></select>
+    </div>
+    <div class="rt-field">
+      <span class="rt-flabel" id="f-per-l">Período</span>
+      <div class="rt-seg" role="group" aria-labelledby="f-per-l">
+        <button type="button" data-per="30" aria-pressed="false">30 dias</button>
+        <button type="button" data-per="60" aria-pressed="false">60 dias</button>
+        <button type="button" data-per="90" aria-pressed="false">90 dias</button>
+        <button type="button" data-per="custom" aria-pressed="false">Escolher datas</button>
+      </div>
+    </div>
+    <div class="rt-field rt-custom" hidden>
+      <span class="rt-flabel">De / até</span>
+      <div class="rt-dates">
+        <input type="date" id="f-de" aria-label="Data inicial" min="2025-01-01">
+        <input type="date" id="f-ate" aria-label="Data final" min="2025-01-01">
+      </div>
+    </div>
+  </section>
+
+  <section class="rt-tiles" id="indicadores" aria-label="Indicadores">
+    <div class="rt-card rt-tile"><div class="rt-l">Pedidos que chegaram</div><div class="rt-n dash-skeleton" data-draw="t-cheg" data-source="resumo" data-field="chegaram" data-row="0"></div><div class="rt-s">no período escolhido</div></div>
+    <div class="rt-card rt-tile"><div class="rt-l">Pedidos resolvidos</div><div class="rt-n rt-ok dash-skeleton" data-draw="t-res" data-source="resumo" data-field="resolvidos" data-row="0"></div><div class="rt-s">no período escolhido</div></div>
+    <div class="rt-card rt-tile"><div class="rt-l">Saldo do período</div><div class="rt-n dash-skeleton" data-draw="t-saldo" data-source="resumo" data-field="saldo" data-row="0"></div><div class="rt-s" data-draw="t-saldo-txt">—</div></div>
+    <div class="rt-card rt-tile"><div class="rt-l">Pendentes hoje</div><div class="rt-n dash-skeleton" data-draw="t-pen" data-source="resumo" data-field="pendentes" data-row="0"></div><div class="rt-s">ainda sem solução, de qualquer data</div></div>
+    <div class="rt-card rt-tile"><div class="rt-l">Urgentes pendentes</div><div class="rt-n rt-bad dash-skeleton" data-draw="t-urg" data-source="resumo" data-field="urgentes" data-row="0"></div><div class="rt-s">prioridade muito alta ou alta</div></div>
+    <div class="rt-card rt-tile"><div class="rt-l">Dias até 01/01/2027</div><div class="rt-n rt-warn" data-draw="t-dias">—</div><div class="rt-s">entrada do Simples Nacional e cobrança da CBS</div></div>
+  </section>
+
+  <section class="rt-sec" id="ritmo">
+    <div><h2 class="rt-h2">Chegaram × resolvidos</h2><p class="rt-sub">Se a barra verde fica maior que a roxa, a fila está diminuindo.</p></div>
+    <div class="rt-card">
+      <div class="rt-keys"><span><i style="background:var(--cds-chart-categorical-2, #5856d6)"></i>Chegaram</span><span><i style="background:var(--color-ok)"></i>Resolvidos</span></div>
+      <div class="rt-chart" data-draw="serie" data-source="serie"></div>
+    </div>
+  </section>
+
+  <section class="rt-grid2" id="pendencias">
+    <div class="rt-card" id="por-urgencia">
+      <h3 class="rt-h3">Pendentes por urgência</h3>
+      <p class="rt-help">Quanto mais alta, mais rápido precisa sair.</p>
+      <div class="rt-bars" data-draw="urgencia" data-source="por_urgencia"></div>
+    </div>
+    <div class="rt-card" id="por-etapa">
+      <h3 class="rt-h3">Em que pé estão os pendentes</h3>
+      <p class="rt-help">"Aguardando desenvolvimento" é o que já foi analisado e espera o time começar.</p>
+      <div class="rt-bars" data-draw="etapa" data-source="por_etapa"></div>
+    </div>
+  </section>
+
+  <section class="rt-sec rt-prod-sec" id="produtos">
+    <div><h2 class="rt-h2">Produtos com mais pendências</h2><p class="rt-sub">Clique em um produto para ver só ele.</p></div>
+    <div class="rt-card">
+      <div class="rt-keys"><span><i style="background:var(--color-bad)"></i>Urgentes</span><span><i style="background:var(--cds-chart-muted)"></i>Demais pendentes</span></div>
+      <div class="rt-bars" data-draw="produtos" data-source="por_produto"></div>
+    </div>
+  </section>
+
+  <section class="rt-sec" id="urgentes">
+    <div><h2 class="rt-h2">Pedidos pendentes</h2><p class="rt-sub"><span data-draw="urg-n">—</span>. Ordenados por urgência e, dentro dela, pela data de produção mais próxima.</p></div>
+    <div class="rt-tfilters" id="filtros-pedidos">
+      <div class="rt-field"><label for="f-sit">Situação</label><select class="dash-select" id="f-sit" data-draw="sit-sel" data-source="urgentes"></select></div>
+      <div class="rt-field"><label for="f-urg">Urgência</label>
+        <select class="dash-select" id="f-urg">
+          <option value="">Todas as urgências</option>
+          <option value="Muito alta">Muito alta</option>
+          <option value="Alta">Alta</option>
+          <option value="Média">Média</option>
+          <option value="Baixa">Baixa</option>
+        </select></div>
+      <div class="rt-field"><label for="f-prazo">Data para Produção</label>
+        <select class="dash-select" id="f-prazo">
+          <option value="">Todas as datas</option>
+          <option value="vigente">Já em produção</option>
+          <option value="30">Entram em até 30 dias</option>
+          <option value="90">Entram em até 90 dias</option>
+          <option value="sem">Sem data oficial</option>
+        </select></div>
+      <p class="rt-help" style="margin:0 0 6px">A data vem de fontes oficiais (Portal da NF-e/SVRS, Receita Federal, Comitê Gestor do IBS e LC 214/2025). Sem fonte oficial, aparece "Sem data oficial".</p>
+    </div>
+    <div class="rt-card rt-tw">
+      <table class="rt-table" data-source="urgentes_prazo" data-row-key="chave">
+        <thead><tr><th data-field="pedido">O que precisa ser feito</th><th data-field="produto">Produto</th><th data-field="etapa">Situação</th><th data-field="urgencia">Urgência</th><th data-field="producao" class="rt-center">Data para Produção</th><th data-field="chave">Código no Jira</th></tr></thead>
+        <tbody data-draw="urg-t"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="rt-sec" id="evolucao">
+    <div><h2 class="rt-h2">Evolução dia a dia</h2><p class="rt-sub">Percentual já resolvido de tudo o que chegou desde jan/2025. Um ponto por atualização do painel.</p></div>
+    <div class="rt-card"><div class="rt-chart" style="min-height:160px" data-draw="evolucao" data-source="evolucao"></div></div>
+  </section>
+
+  <section class="rt-sec" id="prazos">
+    <div><h2 class="rt-h2">Datas que não podem passar</h2><p class="rt-sub">Prazos do governo. A contagem é a partir de hoje.</p></div>
+    <div class="rt-dl">
+      <div class="rt-card"><div class="rt-d">01 dez 2026</div><div class="rt-t">3ª onda</div><div class="rt-cd" data-draw="cd-1">—</div><p>Novos tipos de nota passam a exigir IBS e CBS: plataformas, imóveis, água e gás.</p></div>
+      <div class="rt-card rt-key"><div class="rt-d">01 jan 2027</div><div class="rt-t">4ª onda e CBS cobrada</div><div class="rt-cd" data-draw="cd-2">—</div><p>Empresas do Simples entram, a nota passa a mostrar o valor líquido e PIS/Cofins acabam.</p></div>
+      <div class="rt-card"><div class="rt-d">Sem data</div><div class="rt-t">Nota recusada sem IBS/CBS</div><div class="rt-cd">—</div><p>A Sefaz vai voltar a recusar notas sem esses campos. Data ainda não anunciada.</p></div>
+      <div class="rt-card"><div class="rt-d">01 jan 2029</div><div class="rt-t">ICMS e ISS começam a cair</div><div class="rt-cd" data-draw="cd-3">—</div><p>Os impostos antigos diminuem até sumir em 2033.</p></div>
+    </div>
+  </section>
+
+  <details class="rt-card rt-gloss" id="glossario">
+    <summary>O que significa cada termo</summary>
+    <dl>
+      <dt>Pedido</dt><dd>Qualquer ajuste aberto no Jira por causa da Reforma Tributária ou de uma nota técnica: mudança de sistema, correção, análise.</dd>
+      <dt>IBS e CBS</dt><dd>Os dois novos impostos sobre consumo. Substituem ICMS, ISS, PIS e Cofins aos poucos, até 2033.</dd>
+      <dt>Nota técnica (NT)</dt><dd>Documento do governo que diz como a nota fiscal deve ser preenchida. Cada nova NT gera pedidos para os produtos.</dd>
+      <dt>Urgência</dt><dd>Muito alta (P0) e Alta (P1) são os urgentes. Média (P2) e Baixa (P3) podem esperar um pouco.</dd>
+      <dt>Aguardando desenvolvimento</dt><dd>O pedido já foi entendido e espera o time de desenvolvimento começar.</dd>
+      <dt>Legislação Fiscal</dt><dd>Time que lê as normas do governo e avisa os produtos. Aparece como um produto no filtro.</dd>
+      <dt>Data para Produção</dt><dd>Data em que a norma do governo ligada ao pedido passa a valer em produção. Pedidos de ajuste geral da reforma usam 01/01/2027, início da cobrança da CBS. "Sem data oficial" quer dizer que o governo ainda não publicou a data.</dd>
+      <dt>Saldo do período</dt><dd>Resolvidos menos os que chegaram. Positivo quer dizer que a fila diminuiu.</dd>
+    </dl>
+  </details>
+
+  <p class="rt-foot" id="rodape">Fonte: Jira Linx. Pedidos com "reforma tributária", IBS, CBS, "NT 2025", "NT 2026" ou "nota técnica" no título, criados desde 01/01/2025. Atualizado automaticamente nos dias úteis.</p>
+</div>
+
+<script>
+window.RT = {
+  fmt: (n) => d3.format(',d')(n).replace(/,/g, '.'),
+  hojeISO: () => { const t = new Date(); return new Date(Date.UTC(t.getFullYear(), t.getMonth(), t.getDate())).toISOString().slice(0, 10); },
+  addDias: (iso, n) => new Date(Date.parse(iso + 'T00:00:00Z') + n * 864e5).toISOString().slice(0, 10),
+  janela: (p) => {
+    const hoje = window.RT.hojeISO();
+    if (p.periodo === 'custom' && p.de && p.ate) { const a = p.de <= p.ate ? p.de : p.ate, b = p.de <= p.ate ? p.ate : p.de; return { inicio: a, fim: b, custom: true }; }
+    const n = +(p.periodo || 30) || 30;
+    return { inicio: window.RT.addDias(hoje, -(n - 1)), fim: hoje, n };
+  },
+  dataBR: (iso) => iso.slice(8, 10) + '/' + iso.slice(5, 7) + '/' + iso.slice(0, 4),
+  dias: (iso) => { const t = new Date(); const h = Date.UTC(t.getFullYear(), t.getMonth(), t.getDate()); return Math.round((Date.parse(iso + 'T00:00:00Z') - h) / 864e5); },
+  urgCor: { 'Muito alta': 'var(--color-bad)', 'Alta': 'var(--color-warn)', 'Média': 'var(--cds-chart-categorical-2, #5856d6)', 'Baixa': 'var(--color-fg-muted)' },
+  etapaCor: (e) => ({ 'Aguardando desenvolvimento': 'var(--color-warn)', 'Em desenvolvimento': 'var(--cds-chart-categorical-1, #0071e3)', 'Em análise': 'var(--cds-chart-categorical-2, #5856d6)', 'Em validação': 'var(--color-ok)', 'Na fila': 'var(--color-fg-muted)', 'Em andamento': 'var(--cds-chart-categorical-1, #0071e3)' })[e] || 'var(--color-fg-muted)'
+};
+
+dash.loader('fluxo', {
+  description: 'Lê a seção de entradas e saídas do arquivo do Jira: para cada produto, os dias (contados desde 01/01/2025, em base 36) em que pedidos chegaram e foram resolvidos.',
+  fn: ({ answer }) => {
+    const linhas = String(answer).split('\n');
+    const i = linhas.indexOf('#F'), j = linhas.indexOf('#P');
+    const base = Date.UTC(2025, 0, 1), por = {};
+    const add = (p, d, k, n) => { const key = p + '|' + d; por[key] = por[key] || { produto: p, data: new Date(base + d * 864e5).toISOString().slice(0, 10), chegaram: 0, resolvidos: 0 }; por[key][k] += n; };
+    linhas.slice(i + 1, j).forEach((l) => {
+      const [p, c, r] = l.split('|');
+      [[c, 'chegaram'], [r, 'resolvidos']].forEach(([s, k]) => (s || '').split(',').filter(Boolean).forEach((e) => { const [d, n] = e.split(':'); add(p, parseInt(d, 36), k, n ? +n : 1); }));
+    });
+    return { columns: ['produto', 'data', 'chegaram', 'resolvidos'], rows: Object.values(por).sort((a, b) => a.data.localeCompare(b.data)) };
+  }
+});
+
+dash.loader('pendentes', {
+  description: 'Lê a seção de pendentes do arquivo do Jira: quantidade por produto, urgência e situação.',
+  fn: ({ answer }) => {
+    const linhas = String(answer).split('\n');
+    const i = linhas.indexOf('#P'), j = linhas.indexOf('#H');
+    const urg = { 0: 'Muito alta', 1: 'Alta', 2: 'Média', 3: 'Baixa' };
+    const et = { A: 'Aguardando desenvolvimento', F: 'Na fila', D: 'Em desenvolvimento', N: 'Em análise', V: 'Em validação', E: 'Em andamento' };
+    return { columns: ['produto', 'urgencia', 'etapa', 'qtd'], rows: linhas.slice(i + 1, j).filter(Boolean).map((l) => { const [p, u, e, n] = l.split(','); return { produto: p, urgencia: urg[u], etapa: et[e] || e, qtd: +n }; }) };
+  }
+});
+
+dash.loader('urgentes', {
+  description: 'Lê a lista de pedidos urgentes (prioridade P0 e P1) do arquivo do Jira, juntando cada pedido ao seu título.',
+  fn: ({ answer }) => {
+    const linhas = String(answer).split('\n');
+    const t = linhas.indexOf('#T'), u = linhas.indexOf('#U'), f = linhas.indexOf('#FIM');
+    const titulos = linhas.slice(t + 1, u);
+    const urg = { 0: 'Muito alta', 1: 'Alta', 2: 'Média', 3: 'Baixa' };
+    const et = { A: 'Aguardando desenvolvimento', F: 'Na fila', D: 'Em desenvolvimento', N: 'Em análise', V: 'Em validação', E: 'Em andamento' };
+    return { columns: ['chave', 'produto', 'pedido', 'etapa', 'urgencia'], rows: linhas.slice(u + 1, f < 0 ? undefined : f).filter(Boolean).map((l) => { const [p, n, ti, e, pr] = l.split(','); return { chave: p + '-' + n, produto: p, pedido: titulos[+ti] || '', etapa: et[e] || e, urgencia: urg[pr] }; }) };
+  }
+});
+
+dash.calc('resumo', {
+  title: 'Resumo do período',
+  description: 'Pedidos que chegaram e que foram resolvidos dentro do período e do produto escolhidos, e os pendentes de hoje.',
+  inputs: ['fluxo', 'pendentes'],
+  fn: (fluxo, pendentes) => {
+    const p = dash.params(), j = window.RT.janela(p), prod = p.produto || '';
+    const f = fluxo.filter((r) => (!prod || r.produto === prod) && r.data >= j.inicio && r.data <= j.fim);
+    const pe = pendentes.filter((r) => !prod || r.produto === prod);
+    const chegaram = d3.sum(f, (r) => r.chegaram), resolvidos = d3.sum(f, (r) => r.resolvidos);
+    return [{ chegaram, resolvidos, saldo: resolvidos - chegaram, pendentes: d3.sum(pe, (r) => r.qtd), urgentes: d3.sum(pe.filter((r) => r.urgencia === 'Muito alta' || r.urgencia === 'Alta'), (r) => r.qtd), inicio: j.inicio, fim: j.fim }];
+  }
+});
+
+dash.calc('serie', {
+  title: 'Chegaram e resolvidos ao longo do período',
+  description: 'Soma por dia (até 45 dias), por semana (até 200 dias) ou por mês, no produto escolhido.',
+  inputs: ['fluxo'],
+  fn: (fluxo) => {
+    const p = dash.params(), j = window.RT.janela(p), prod = p.produto || '';
+    const total = Math.round((Date.parse(j.fim) - Date.parse(j.inicio)) / 864e5) + 1;
+    const passo = total <= 45 ? 'dia' : total <= 200 ? 'semana' : 'mes';
+    const balde = (iso) => passo === 'dia' ? iso : passo === 'mes' ? iso.slice(0, 7) + '-01' : window.RT.addDias(iso, -((new Date(iso + 'T00:00:00Z').getUTCDay() + 6) % 7));
+    const m = new Map();
+    for (let d = j.inicio; d <= j.fim; d = window.RT.addDias(d, 1)) { const b = balde(d); if (!m.has(b)) m.set(b, { inicio: b, passo, chegaram: 0, resolvidos: 0 }); }
+    fluxo.forEach((r) => { if ((!prod || r.produto === prod) && r.data >= j.inicio && r.data <= j.fim) { const o = m.get(balde(r.data)); if (o) { o.chegaram += r.chegaram; o.resolvidos += r.resolvidos; } } });
+    return [...m.values()];
+  }
+});
+
+dash.calc('por_urgencia', {
+  title: 'Pendentes por urgência', description: 'Pendentes de hoje no produto escolhido, por urgência.', inputs: ['pendentes'],
+  fn: (pendentes) => { const prod = dash.params().produto || ''; return ['Muito alta', 'Alta', 'Média', 'Baixa'].map((u) => ({ urgencia: u, qtd: d3.sum(pendentes.filter((r) => r.urgencia === u && (!prod || r.produto === prod)), (r) => r.qtd) })); }
+});
+
+dash.calc('por_etapa', {
+  title: 'Pendentes por situação', description: 'Pendentes de hoje no produto escolhido, pela situação em que estão.', inputs: ['pendentes'],
+  fn: (pendentes) => { const prod = dash.params().produto || ''; return d3.rollups(pendentes.filter((r) => !prod || r.produto === prod), (v) => d3.sum(v, (r) => r.qtd), (r) => r.etapa).map(([etapa, qtd]) => ({ etapa, qtd })).sort((a, b) => b.qtd - a.qtd); }
+});
+
+dash.calc('por_produto', {
+  title: 'Pendentes por produto', description: 'Os 15 produtos com mais pendentes hoje, com a parte urgente.', inputs: ['pendentes', 'produtos'],
+  fn: (pendentes, produtos) => {
+    const nome = new Map(produtos.map((p) => [p.produto, p.nome]));
+    return d3.rollups(pendentes, (v) => ({ pendentes: d3.sum(v, (r) => r.qtd), urgentes: d3.sum(v.filter((r) => r.urgencia === 'Muito alta' || r.urgencia === 'Alta'), (r) => r.qtd) }), (r) => r.produto)
+      .map(([produto, o]) => ({ produto, nome: nome.get(produto) || produto, ...o })).sort((a, b) => b.pendentes - a.pendentes).slice(0, 15);
+  }
+});
+
+dash.calc('evolucao', {
+  title: 'Evolução a cada atualização', description: 'Percentual resolvido de tudo o que chegou desde jan/2025, no produto escolhido, em cada dia em que o painel foi atualizado.', inputs: ['historico'],
+  fn: (historico) => { const prod = dash.params().produto || ''; return d3.rollups(historico.filter((r) => !prod || r.produto === prod), (v) => { const t = d3.sum(v, (r) => +r.total), res = d3.sum(v, (r) => +r.resolvidos); return { total: t, resolvidos: res, pendentes: d3.sum(v, (r) => +r.pendentes), pct_resolvido: t ? Math.round(res / t * 1000) / 10 : 0 }; }, (r) => r.data).map(([data, o]) => ({ data, ...o })).sort((a, b) => a.data.localeCompare(b.data)); }
+});
+
+dash.calc('urgentes_prazo', {
+  title: 'Pedidos urgentes com data para produção', description: 'Liga cada pedido urgente à norma do governo que o originou, pelo título, e traz a data em que a norma entra em produção.', inputs: ['urgentes', 'prazos'],
+  fn: (urgentes, prazos) => {
+    const regras = prazos.slice().sort((a, b) => a.ordem - b.ordem).map((p) => ({ ...p, re: new RegExp(p.padrao, 'i') }));
+    return urgentes.map((r) => { const m = regras.find((p) => p.re.test(r.pedido)); return { ...r, producao: m && m.data ? m.data : null, norma: m ? m.norma : 'Sem norma identificada', fonte_nome: m ? m.fonte_nome : null, fonte: m ? m.fonte : null }; });
+  }
+});
+
+window.RT.prazoOk = (r, f) => { if (!f) return true; if (f === 'sem') return !r.producao; if (!r.producao) return false; const n = window.RT.dias(r.producao); return f === 'vigente' ? n <= 0 : n > 0 && n <= +f; };
+window.RT.filtrados = (rows) => { const p = dash.params(), prod = p.produto || ''; return rows.filter((r) => (!prod || r.produto === prod) && (!p.situacao || r.etapa === p.situacao) && (!p.urgencia || r.urgencia === p.urgencia) && window.RT.prazoOk(r, p.prazo || '')); };
+document.querySelectorAll('#f-prazo').forEach((s) => s.addEventListener('change', () => dash.setParams({ prazo: s.value || null })));
+document.querySelectorAll('#f-urg').forEach((s) => s.addEventListener('change', () => dash.setParams({ urgencia: s.value || null })));
+
+// Controles de período: só escutam e marcam estado
+const segBtns = document.querySelectorAll('.rt-seg button[data-per]');
+segBtns.forEach((b) => b.addEventListener('click', () => {
+  const per = b.dataset.per;
+  if (per === 'custom') { const h = window.RT.hojeISO(); const p = dash.params(); dash.setParams({ periodo: 'custom', de: p.de || window.RT.addDias(h, -29), ate: p.ate || h }); }
+  else dash.setParams({ periodo: per });
+}));
+document.querySelectorAll('#f-de, #f-ate').forEach((inp) => inp.addEventListener('change', () => { const de = document.querySelector('#f-de'), ate = document.querySelector('#f-ate'); if (de && ate && de.value && ate.value) dash.setParams({ periodo: 'custom', de: de.value, ate: ate.value }); }));
+dash.onData(() => {
+  const p = dash.params(), per = p.periodo || '30';
+  segBtns.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.per === per)));
+  document.querySelectorAll('.rt-custom').forEach((el) => { el.hidden = per !== 'custom'; });
+  const j = window.RT.janela(p);
+  document.querySelectorAll('#f-de').forEach((el) => { el.value = j.inicio; });
+  document.querySelectorAll('#f-ate').forEach((el) => { el.value = j.fim; });
+  document.querySelectorAll('.rt-prod-sec').forEach((el) => { el.hidden = !!p.produto; });
+  document.querySelectorAll('#f-prazo').forEach((el) => { if (document.activeElement !== el) el.value = p.prazo || ''; });
+  document.querySelectorAll('#f-urg').forEach((el) => { if (document.activeElement !== el) el.value = p.urgencia || ''; });
+});
+</script>
+
+<script>
+const R = window.RT;
+const um = (id, campo, f) => (el) => {
+  const d = dash.data(id);
+  if (d.status === 'loading') return;
+  el.classList.remove('dash-skeleton');
+  el.textContent = d.status === 'ok' && d.data[0] ? f(d.data[0][campo]) : '—';
+};
+['l-cheg:chegaram', 'l-res:resolvidos', 'l-pen:pendentes', 'l-urg:urgentes', 't-cheg:chegaram', 't-res:resolvidos', 't-pen:pendentes', 't-urg:urgentes'].forEach((s) => { const [n, c] = s.split(':'); dash.draw(n, um('resumo', c, R.fmt)); });
+dash.draw('t-saldo', (el) => {
+  const d = dash.data('resumo'); if (d.status === 'loading') return; el.classList.remove('dash-skeleton');
+  if (d.status !== 'ok' || !d.data[0]) { el.textContent = '—'; return; }
+  const s = d.data[0].saldo; el.textContent = (s > 0 ? '+' : '') + R.fmt(s); el.style.color = s > 0 ? 'var(--color-ok)' : s < 0 ? 'var(--color-bad)' : '';
+});
+dash.draw('t-saldo-txt', (el) => { const d = dash.data('resumo'); if (d.status !== 'ok' || !d.data[0]) { el.textContent = '—'; return; } const s = d.data[0].saldo; el.textContent = s > 0 ? 'a fila diminuiu' : s < 0 ? 'a fila aumentou' : 'a fila ficou igual'; });
+dash.draw('periodo-txt', (el) => { const p = dash.params(), j = R.janela(p); el.textContent = j.custom ? 'dias de ' + R.dataBR(j.inicio) + ' a ' + R.dataBR(j.fim) : 'últimos ' + j.n + ' dias'; });
+dash.draw('nome-prod', (el) => { const prod = dash.params().produto; if (!prod) { el.textContent = 'Todos os produtos'; return; } const d = dash.data('produtos'); const r = d.status === 'ok' ? d.data.find((x) => x.produto === prod) : null; el.textContent = r ? r.nome : prod; });
+dash.draw('t-dias', (el) => { const n = R.dias('2027-01-01'); el.textContent = n > 0 ? String(n) : 'Em vigor'; });
+const cd = (iso) => (el) => { const n = R.dias(iso); el.textContent = n > 0 ? n + (n === 1 ? ' dia' : ' dias') : n === 0 ? 'Hoje' : 'Em vigor'; };
+dash.draw('cd-1', cd('2026-12-01')); dash.draw('cd-2', cd('2027-01-01')); dash.draw('cd-3', cd('2029-01-01'));
+
+dash.draw('produto-sel', (sel) => {
+  const d = dash.data('produtos');
+  const lista = d.status === 'ok' ? d.data.slice().sort((a, b) => a.nome.localeCompare(b.nome, 'pt-BR')) : [];
+  sel.replaceChildren(new Option('Todos os produtos', ''), ...lista.map((r) => new Option(r.nome, r.produto)));
+  sel.value = dash.params().produto || '';
+  sel.onchange = () => dash.setParams({ produto: sel.value || null });
+});
+
+dash.draw('serie', (el) => {
+  const d = dash.data('serie');
+  if (d.status !== 'ok') { el.textContent = d.status === 'error' ? 'Não foi possível carregar os dados do período.' : '—'; return; }
+  const rows = d.data, W = Math.max(320, el.clientWidth), H = 260, m = { l: 40, r: 8, t: 12, b: 36 };
+  const mes = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
+  const rot = (r) => r.passo === 'mes' ? mes[+r.inicio.slice(5, 7) - 1] + '/' + r.inicio.slice(2, 4) : r.inicio.slice(8, 10) + '/' + r.inicio.slice(5, 7);
+  const x = d3.scaleBand(rows.map((r) => r.inicio), [m.l, W - m.r]).padding(0.2);
+  const y = d3.scaleLinear([0, Math.max(1, d3.max(rows, (r) => Math.max(r.chegaram, r.resolvidos))) * 1.1], [H - m.b, m.t]).nice();
+  el.replaceChildren();
+  const svg = d3.select(el).append('svg').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img').attr('aria-label', 'Pedidos que chegaram e que foram resolvidos no período escolhido');
+  const ticks = y.ticks(5).filter((v) => Number.isInteger(v));
+  svg.append('g').selectAll('line').data(ticks).join('line').attr('x1', m.l).attr('x2', W - m.r).attr('y1', y).attr('y2', y).style('stroke', 'var(--cds-chart-grid)');
+  svg.append('g').selectAll('text').data(ticks).join('text').attr('x', m.l - 6).attr('y', (v) => y(v) + 4).attr('text-anchor', 'end').text((v) => v);
+  const bw = x.bandwidth() / 2;
+  const g = svg.append('g').selectAll('g').data(rows).join('g').attr('transform', (r) => `translate(${x(r.inicio)},0)`);
+  g.append('rect').attr('width', Math.max(1, bw - 1)).attr('y', (r) => y(r.chegaram)).attr('height', (r) => y(0) - y(r.chegaram)).attr('rx', 2).style('fill', 'var(--cds-chart-categorical-2, #5856d6)').attr('data-where', (r) => 'inicio=' + r.inicio).attr('data-field', 'chegaram');
+  g.append('rect').attr('x', bw).attr('width', Math.max(1, bw - 1)).attr('y', (r) => y(r.resolvidos)).attr('height', (r) => y(0) - y(r.resolvidos)).attr('rx', 2).style('fill', 'var(--color-ok)').attr('data-where', (r) => 'inicio=' + r.inicio).attr('data-field', 'resolvidos');
+  const cada = Math.max(1, Math.ceil(rows.length / Math.max(3, Math.floor(W / 70))));
+  svg.append('g').selectAll('text').data(rows.filter((r, i) => i % cada === 0)).join('text').attr('x', (r) => x(r.inicio) + x.bandwidth() / 2).attr('y', H - m.b + 16).attr('text-anchor', 'middle').text(rot);
+  svg.append('text').attr('x', W - m.r).attr('y', H - 4).attr('text-anchor', 'end').text(rows[0] ? (rows[0].passo === 'dia' ? 'por dia' : rows[0].passo === 'semana' ? 'por semana (início)' : 'por mês') : '');
+  const tip = d3.select(el).append('div').attr('class', 'rt-tip').style('display', 'none');
+  svg.append('g').selectAll('rect').data(rows).join('rect').attr('x', (r) => x(r.inicio) - x.step() * x.paddingInner() / 2).attr('width', x.step()).attr('y', m.t).attr('height', H - m.t - m.b).style('fill', 'transparent')
+    .on('pointerenter pointermove', (ev, r) => {
+      const [px] = d3.pointer(ev, el); tip.style('display', null).html('');
+      tip.append('div').append('b').text(r.passo === 'semana' ? 'Semana de ' + rot(r) : rot(r));
+      tip.append('div').text('Chegaram: ' + r.chegaram); tip.append('div').text('Resolvidos: ' + r.resolvidos);
+      const w = tip.node().offsetWidth; tip.style('left', Math.min(Math.max(0, px - w / 2), el.clientWidth - w) + 'px').style('top', '0px');
+    }).on('pointerleave', () => tip.style('display', 'none'));
+});
+
+const barras = (el, rows, o) => {
+  el.replaceChildren();
+  if (!rows.length) { el.textContent = 'Nada pendente aqui.'; return; }
+  const max = Math.max(1, d3.max(rows, o.max));
+  rows.forEach((r) => {
+    const row = document.createElement('div'); row.className = 'rt-bar' + (o.click ? ' rt-click' : '');
+    if (o.click) { row.tabIndex = 0; row.setAttribute('role', 'button'); row.onclick = () => o.click(r); row.onkeydown = (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); o.click(r); } }; }
+    const nm = document.createElement('span'); nm.className = 'rt-nm'; nm.textContent = o.nome(r); nm.title = o.nome(r);
+    const tr = document.createElement('div'); tr.className = 'rt-track'; tr.style.width = Math.max(2, o.max(r) / max * 100) + '%';
+    o.partes(r).forEach(([v, cor]) => { const s = document.createElement('span'); s.style.width = (o.max(r) ? v / o.max(r) * 100 : 0) + '%'; s.style.background = cor; tr.appendChild(s); });
+    const v = document.createElement('span'); v.className = 'rt-v'; const b = document.createElement('b'); b.textContent = R.fmt(o.valor(r)); b.dataset.where = o.where(r); b.dataset.field = o.campo; v.appendChild(b);
+    row.append(nm, tr, v); el.appendChild(row);
+  });
+};
+const falhou = (el, d, txt) => { if (d.status === 'ok') return false; el.textContent = d.status === 'error' ? txt : '—'; return true; };
+dash.draw('urgencia', (el) => { const d = dash.data('por_urgencia'); if (falhou(el, d, 'Não foi possível carregar.')) return; barras(el, d.data, { max: (r) => r.qtd, nome: (r) => r.urgencia, partes: (r) => [[r.qtd, R.urgCor[r.urgencia]]], valor: (r) => r.qtd, where: (r) => 'urgencia=' + encodeURIComponent(r.urgencia), campo: 'qtd' }); });
+dash.draw('etapa', (el) => { const d = dash.data('por_etapa'); if (falhou(el, d, 'Não foi possível carregar.')) return; barras(el, d.data, { max: (r) => r.qtd, nome: (r) => r.etapa, partes: (r) => [[r.qtd, R.etapaCor(r.etapa)]], valor: (r) => r.qtd, where: (r) => 'etapa=' + encodeURIComponent(r.etapa), campo: 'qtd' }); });
+dash.draw('produtos', (el) => { const d = dash.data('por_produto'); if (falhou(el, d, 'Não foi possível carregar.')) return; barras(el, d.data, { max: (r) => r.pendentes, nome: (r) => r.nome, partes: (r) => [[r.urgentes, 'var(--color-bad)'], [r.pendentes - r.urgentes, 'var(--cds-chart-muted)']], valor: (r) => r.pendentes, where: (r) => 'produto=' + encodeURIComponent(r.produto), campo: 'pendentes', click: (r) => dash.setParams({ produto: r.produto }) }); });
+
+dash.draw('sit-sel', (sel) => {
+  const d = dash.data('urgentes'), prod = dash.params().produto || '';
+  const ops = d.status === 'ok' ? [...new Set(d.data.filter((r) => !prod || r.produto === prod).map((r) => r.etapa))].sort((a, b) => a.localeCompare(b, 'pt-BR')) : [];
+  const atual = dash.params().situacao || '';
+  sel.replaceChildren(new Option('Todas as situações', ''), ...ops.map((o) => new Option(o, o)));
+  if (atual && !ops.includes(atual)) sel.appendChild(new Option(atual, atual));
+  sel.value = atual;
+  sel.onchange = () => dash.setParams({ situacao: sel.value || null });
+});
+dash.draw('urg-n', (el) => { const d = dash.data('urgentes_prazo'); if (d.status !== 'ok') { el.textContent = '—'; return; } const n = R.filtrados(d.data).length; el.textContent = n === 0 ? 'Nenhum pedido com esses filtros' : n === 1 ? '1 pedido pendente' : R.fmt(n) + ' pedidos pendentes'; });
+dash.draw('urg-t', (el) => {
+  const d = dash.data('urgentes_prazo'), pr = dash.data('produtos');
+  el.replaceChildren();
+  if (d.status !== 'ok') { const td = el.insertRow().insertCell(); td.colSpan = 6; td.textContent = d.status === 'error' ? 'Não foi possível carregar a lista.' : '—'; return; }
+  const nome = new Map((pr.status === 'ok' ? pr.data : []).map((p) => [p.produto, p.nome]));
+  const ordem = { 'Muito alta': 0, 'Alta': 1, 'Média': 2, 'Baixa': 3 };
+  const rows = R.filtrados(d.data).sort((a, b) => (ordem[a.urgencia] - ordem[b.urgencia]) || ((a.producao || '9999').localeCompare(b.producao || '9999')) || a.etapa.localeCompare(b.etapa) || a.pedido.localeCompare(b.pedido));
+  if (!rows.length) { const td = el.insertRow().insertCell(); td.colSpan = 6; td.textContent = 'Nenhum pedido com esses filtros.'; return; }
+  const pill = (t, c) => { const s = document.createElement('span'); s.className = 'rt-pill'; s.style.color = c; s.textContent = t; return s; };
+  rows.forEach((r) => {
+    const tr = el.insertRow(); tr.dataset.key = r.chave;
+    tr.insertCell().textContent = r.pedido;
+    tr.insertCell().textContent = nome.get(r.produto) || r.produto;
+    tr.insertCell().appendChild(pill(r.etapa, R.etapaCor(r.etapa)));
+    tr.insertCell().appendChild(pill(r.urgencia, R.urgCor[r.urgencia]));
+    const td = tr.insertCell(); td.className = 'rt-center'; const box = document.createElement('div'); box.className = 'rt-due';
+    const dt = document.createElement('b'); dt.textContent = r.producao ? R.dataBR(r.producao) : 'Sem data oficial'; box.appendChild(dt);
+    if (r.producao) { const n = R.dias(r.producao); box.appendChild(n <= 0 ? pill('Já em produção', 'var(--color-ok)') : n <= 30 ? pill('Faltam ' + n + (n === 1 ? ' dia' : ' dias'), 'var(--color-bad)') : pill('Faltam ' + n + ' dias', 'var(--color-warn)')); }
+    const nm = document.createElement('span'); nm.className = 'rt-norma'; nm.textContent = r.norma; box.appendChild(nm);
+    const tipw = document.createElement('span'); tipw.className = 'rt-src';
+    const btn = document.createElement('button'); btn.type = 'button'; btn.className = 'rt-src-btn'; btn.textContent = 'ⓘ Fonte'; btn.setAttribute('aria-label', 'Ver fonte da data de ' + r.chave);
+    const pop = document.createElement('span'); pop.className = 'rt-src-pop'; pop.setAttribute('role', 'tooltip');
+    const t1 = document.createElement('b'); t1.textContent = r.fonte_nome || 'Sem fonte oficial'; pop.appendChild(t1);
+    const t2 = document.createElement('span'); t2.textContent = r.norma; pop.appendChild(t2);
+    if (r.fonte && /^https:\/\//.test(r.fonte)) { const a = document.createElement('a'); a.href = r.fonte; a.target = '_blank'; a.rel = 'noopener'; a.textContent = 'Abrir fonte oficial ↗'; pop.appendChild(a); }
+    else { const t3 = document.createElement('span'); t3.textContent = 'O governo ainda não publicou data oficial para este item.'; pop.appendChild(t3); }
+    btn.onclick = () => tipw.classList.toggle('rt-open');
+    tipw.append(btn, pop); box.appendChild(tipw);
+    td.appendChild(box);
+    const k = tr.insertCell(); k.className = 'rt-k'; k.textContent = r.chave;
+  });
+});
+
+dash.draw('evolucao', (el) => {
+  const d = dash.data('evolucao');
+  if (d.status !== 'ok') { el.textContent = '—'; return; }
+  const rows = d.data; if (!rows.length) { el.textContent = 'Sem histórico ainda.'; return; }
+  const W = Math.max(280, el.clientWidth), H = 160, m = { l: 40, r: 48, t: 14, b: 24 }, t = (s) => Date.parse(s + 'T12:00:00Z');
+  const ext = d3.extent(rows, (r) => t(r.data)); if (ext[0] === ext[1]) { ext[0] -= 7 * 864e5; ext[1] += 7 * 864e5; }
+  const x = d3.scaleUtc(ext, [m.l, W - m.r]);
+  const lo = Math.max(0, Math.floor(d3.min(rows, (r) => r.pct_resolvido) / 5) * 5 - 5), y = d3.scaleLinear([lo, 100], [H - m.b, m.t]);
+  el.replaceChildren();
+  const svg = d3.select(el).append('svg').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img').attr('aria-label', 'Percentual resolvido em cada atualização do painel');
+  svg.append('g').selectAll('line').data(y.ticks(3)).join('line').attr('x1', m.l).attr('x2', W - m.r).attr('y1', y).attr('y2', y).style('stroke', 'var(--cds-chart-grid)');
+  svg.append('g').selectAll('text').data(y.ticks(3)).join('text').attr('x', m.l - 6).attr('y', (v) => y(v) + 4).attr('text-anchor', 'end').text((v) => v + '%');
+  svg.append('path').datum(rows).attr('d', d3.line((r) => x(t(r.data)), (r) => y(r.pct_resolvido))).style('fill', 'none').style('stroke', 'var(--color-ok)').style('stroke-width', 2);
+  svg.append('g').selectAll('circle').data(rows).join('circle').attr('cx', (r) => x(t(r.data))).attr('cy', (r) => y(r.pct_resolvido)).attr('r', 4).style('fill', 'var(--color-ok)').attr('data-where', (r) => 'data=' + r.data).attr('data-field', 'pct_resolvido');
+  const last = rows[rows.length - 1];
+  svg.append('text').attr('x', x(t(last.data)) + 8).attr('y', y(last.pct_resolvido) + 4).style('fill', 'var(--color-fg)').style('font-weight', 600).text(String(last.pct_resolvido).replace('.', ',') + '%');
+  svg.append('g').selectAll('text').data(rows.length > 6 ? [rows[0], last] : rows).join('text').attr('x', (r) => x(t(r.data))).attr('y', H - 6).attr('text-anchor', 'middle').text((r) => r.data.slice(8, 10) + '/' + r.data.slice(5, 7));
+});
+</script>
+</div></div><script>(function(){const sh=document.querySelector('.rt-shell');const pinta=()=>requestAnimationFrame(()=>{document.body.style.background=getComputedStyle(sh).backgroundColor;});pinta();new MutationObserver(pinta).observe(document.documentElement,{attributes:true,attributeFilter:['data-mode']});matchMedia('(prefers-color-scheme: dark)').addEventListener('change',pinta);})();</script>
+</body>
+</html>
