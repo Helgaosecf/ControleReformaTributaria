@@ -227,17 +227,34 @@ body{margin:0;background:#fff}
 .rt-toast.on{opacity:1}
 @media (max-width:900px){.rt-cli-grid{grid-template-columns:1fr}.rt-cli-lista{border-right:0;border-bottom:1px solid var(--color-border-line)}.rt-cli-busca{grid-template-columns:1fr 1fr}.rt-search{grid-column:1/-1}.rt-cli-dt{grid-column:1/-1}.rt-cli-busca select{min-width:0;width:100%}}
 @media (max-width:640px){.rt-shell .rt-cli{padding:0}.rt-shell .rt-cli-t td:nth-child(2)::before{content:"Produto / NT"}.rt-shell .rt-cli-t td:nth-child(3)::before{content:"Entrega"}.rt-shell .rt-cli-t td:nth-child(4)::before{content:"Situação"}.rt-shell .rt-cli-t td:first-child{padding-left:0}.rt-shell .rt-cli-t tbody tr{padding:12px 16px}.rt-shell .rt-cli-t tr.rt-g{padding:0}.rt-shell .rt-cli-t tr.rt-g td{display:block}.rt-shell .rt-cli-t tr.rt-g td::before{content:none}.rt-cli-dt input{flex:1;min-width:0}}
-</style>
+.rt-ptabs{display:flex;gap:2px;border-bottom:1px solid var(--color-border-line);overflow-x:auto;scrollbar-width:none}
+.rt-ptabs button{font:inherit;font-size:14.5px;font-weight:500;color:var(--color-fg-muted);background:none;border:0;border-bottom:2px solid transparent;margin-bottom:-1px;padding:10px 16px 12px;cursor:pointer;white-space:nowrap}
+.rt-ptabs button:hover{color:var(--color-fg)}
+.rt-ptabs button[aria-selected="true"]{color:var(--color-fg);border-bottom-color:var(--cds-chart-categorical-1);font-weight:600}
+.rt-kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:var(--cds-gap-md)}
+.rt-kpi{font:inherit;color:inherit;text-align:left;cursor:pointer;display:grid;gap:4px;align-content:start;transition:border-color .15s,box-shadow .15s}
+.rt-kpi:hover{border-color:color-mix(in srgb,var(--cds-chart-categorical-1) 45%,var(--color-border-line))}
+.rt-kpi[aria-pressed="true"]{border-color:var(--cds-chart-categorical-1);box-shadow:inset 0 0 0 1px var(--cds-chart-categorical-1)}
+.rt-kpi .rt-kpi-a{font-size:12.5px;font-weight:500;color:var(--cds-chart-categorical-1);margin-top:2px}
+.rt-off{position:absolute!important;left:-300vw!important;top:0;width:min(1680px,calc(100vw - 80px));visibility:hidden;pointer-events:none}</style>
 
 <div class="rt">
   <header class="rt-head" id="topo">
     <div class="rt-eyebrow">Reforma Tributária · <span data-draw="nome-prod">—</span> · <span class="rt-upd" data-draw="atualizado">—</span></div>
     <h1 class="rt-title">Como estamos na Reforma Tributária</h1>
-    <p class="rt-lede">Nos <span data-draw="periodo-txt">—</span>, chegaram <b data-draw="l-cheg" data-source="resumo" data-field="chegaram" data-row="0" class="dash-skeleton"></b> pedidos de ajuste e <b data-draw="l-res" data-source="resumo" data-field="resolvidos" data-row="0" class="dash-skeleton"></b> foram resolvidos. Hoje há <b data-draw="l-pen" data-source="resumo" data-field="pendentes" data-row="0" class="dash-skeleton"></b> pedidos pendentes, e <b data-draw="l-urg" data-source="resumo" data-field="urgentes" data-row="0" class="dash-skeleton"></b> deles são urgentes.</p>
+    <p class="rt-lede" data-ptab-panel="pedidos">Nos <span data-draw="periodo-txt">—</span>, chegaram <b data-draw="l-cheg" data-source="resumo" data-field="chegaram" data-row="0" class="dash-skeleton"></b> pedidos de ajuste e <b data-draw="l-res" data-source="resumo" data-field="resolvidos" data-row="0" class="dash-skeleton"></b> foram resolvidos. Hoje há <b data-draw="l-pen" data-source="resumo" data-field="pendentes" data-row="0" class="dash-skeleton"></b> pedidos pendentes, e <b data-draw="l-urg" data-source="resumo" data-field="urgentes" data-row="0" class="dash-skeleton"></b> deles são urgentes.</p>
   </header>
 
+  <nav class="rt-ptabs" role="tablist" aria-label="Seções do painel" id="ptabs">
+    <button type="button" role="tab" data-ptab="clientes" aria-selected="true">Entregas por cliente</button>
+    <button type="button" role="tab" data-ptab="normas" aria-selected="false">Normas por produto</button>
+    <button type="button" role="tab" data-ptab="pedidos" aria-selected="false">Pedidos no Jira</button>
+    <button type="button" role="tab" data-ptab="prazos" aria-selected="false">Prazos e termos</button>
+  </nav>
 
-  <section class="rt-sec" id="clientes">
+  <section class="rt-kpis" id="cli-kpis" data-ptab-panel="clientes" aria-label="Filtros rápidos das entregas por cliente"></section>
+
+  <section class="rt-sec" id="clientes" data-ptab-panel="clientes">
     <div class="rt-cli-top">
       <div><h2 class="rt-h2">Entregas por cliente</h2><p class="rt-sub">Encontre o cliente e veja o que será entregue, quando e em que situação está.</p></div>
       <button type="button" class="rt-btn" id="cli-exp">Exportar consulta ↓</button>
@@ -266,7 +283,7 @@ body{margin:0;background:#fff}
     </div>
   </section>
 
-  <section class="rt-filters" id="filtros" aria-label="Filtros">
+  <section class="rt-filters" id="filtros" aria-label="Filtros" data-ptab-panel="normas pedidos">
     <div class="rt-field">
       <label for="f-produto">Produto</label>
       <select class="dash-select" id="f-produto" data-draw="produto-sel" data-source="produtos"></select>
@@ -290,7 +307,7 @@ body{margin:0;background:#fff}
   </section>
 
 
-  <section class="rt-sec" id="entregas">
+  <section class="rt-sec" id="entregas" data-ptab-panel="normas">
     <div><h2 class="rt-h2">Entregas das normas por produto</h2><p class="rt-sub">Normas acompanhadas pelo time de Legislação (ICT) no Jira, com a data em que passam a valer e a data prevista de entrega. Escolha um produto no filtro acima para ver só as normas que o afetam.</p></div>
     <div class="rt-tiles">
       <div class="rt-card rt-tile"><div class="rt-l">Normas em aberto</div><div class="rt-n" data-draw="ict-aberto">—</div><div class="rt-s">ainda sem entrega</div></div>
@@ -316,7 +333,7 @@ body{margin:0;background:#fff}
     <p class="rt-foot" data-draw="ict-fonte">—</p>
   </section>
 
-  <section class="rt-tiles" id="indicadores" aria-label="Indicadores">
+  <section class="rt-tiles" id="indicadores" data-ptab-panel="pedidos" aria-label="Indicadores">
     <div class="rt-card rt-tile"><div class="rt-l">Pedidos que chegaram</div><div class="rt-n dash-skeleton" data-draw="t-cheg" data-source="resumo" data-field="chegaram" data-row="0"></div><div class="rt-s">no período escolhido</div></div>
     <div class="rt-card rt-tile"><div class="rt-l">Pedidos resolvidos</div><div class="rt-n rt-ok dash-skeleton" data-draw="t-res" data-source="resumo" data-field="resolvidos" data-row="0"></div><div class="rt-s">no período escolhido</div></div>
     <div class="rt-card rt-tile"><div class="rt-l">Saldo do período</div><div class="rt-n dash-skeleton" data-draw="t-saldo" data-source="resumo" data-field="saldo" data-row="0"></div><div class="rt-s" data-draw="t-saldo-txt">—</div></div>
@@ -325,7 +342,7 @@ body{margin:0;background:#fff}
     <div class="rt-card rt-tile"><div class="rt-l">Dias até 01/01/2027</div><div class="rt-n rt-warn" data-draw="t-dias">—</div><div class="rt-s">entrada do Simples Nacional e cobrança da CBS</div></div>
   </section>
 
-  <section class="rt-sec" id="ritmo">
+  <section class="rt-sec" id="ritmo" data-ptab-panel="pedidos">
     <div><h2 class="rt-h2">Chegaram × resolvidos</h2><p class="rt-sub">Se a barra verde fica maior que a roxa, a fila está diminuindo.</p></div>
     <div class="rt-card">
       <div class="rt-keys"><span><i style="background:var(--cds-chart-categorical-2, #5856d6)"></i>Chegaram</span><span><i style="background:var(--color-ok)"></i>Resolvidos</span></div>
@@ -333,7 +350,7 @@ body{margin:0;background:#fff}
     </div>
   </section>
 
-  <section class="rt-grid2" id="pendencias">
+  <section class="rt-grid2" id="pendencias" data-ptab-panel="pedidos">
     <div class="rt-card" id="por-urgencia">
       <h3 class="rt-h3">Pendentes por urgência</h3>
       <p class="rt-help">Quanto mais alta, mais rápido precisa sair.</p>
@@ -346,7 +363,7 @@ body{margin:0;background:#fff}
     </div>
   </section>
 
-  <section class="rt-sec rt-prod-sec" id="produtos">
+  <section class="rt-sec rt-prod-sec" id="produtos" data-ptab-panel="pedidos">
     <div><h2 class="rt-h2">Produtos com mais pendências</h2><p class="rt-sub">Clique em um produto para ver só ele.</p></div>
     <div class="rt-card">
       <div class="rt-keys"><span><i style="background:var(--color-bad)"></i>Urgentes</span><span><i style="background:var(--cds-chart-muted)"></i>Demais pendentes</span></div>
@@ -354,7 +371,7 @@ body{margin:0;background:#fff}
     </div>
   </section>
 
-  <section class="rt-sec" id="urgentes">
+  <section class="rt-sec" id="urgentes" data-ptab-panel="pedidos">
     <div><h2 class="rt-h2">Pedidos pendentes</h2><p class="rt-sub"><span data-draw="urg-n">—</span>. Ordenados por urgência e, dentro dela, pela data de produção mais próxima.</p></div>
     <div class="rt-tfilters" id="filtros-pedidos">
       <div class="rt-field"><label for="f-sit">Situação</label><select class="dash-select" id="f-sit" data-draw="sit-sel" data-source="urgentes"></select></div>
@@ -384,12 +401,12 @@ body{margin:0;background:#fff}
     </div>
   </section>
 
-  <section class="rt-sec" id="evolucao">
+  <section class="rt-sec" id="evolucao" data-ptab-panel="pedidos">
     <div><h2 class="rt-h2">Evolução dia a dia</h2><p class="rt-sub">Percentual já resolvido de tudo o que chegou desde jan/2025. Um ponto por atualização do painel.</p></div>
     <div class="rt-card"><div class="rt-chart" style="min-height:160px" data-draw="evolucao" data-source="evolucao"></div></div>
   </section>
 
-  <section class="rt-sec" id="prazos">
+  <section class="rt-sec" id="prazos" data-ptab-panel="prazos">
     <div><h2 class="rt-h2">Datas que não podem passar</h2><p class="rt-sub">Prazos do governo. A contagem é a partir de hoje.</p></div>
     <div class="rt-dl">
       <div class="rt-card"><div class="rt-d">01 dez 2026</div><div class="rt-t">3ª onda</div><div class="rt-cd" data-draw="cd-1">—</div><p>Novos tipos de nota passam a exigir IBS e CBS: plataformas, imóveis, água e gás.</p></div>
@@ -399,7 +416,7 @@ body{margin:0;background:#fff}
     </div>
   </section>
 
-  <details class="rt-card rt-gloss" id="glossario">
+  <details class="rt-card rt-gloss" id="glossario" data-ptab-panel="prazos">
     <summary>O que significa cada termo</summary>
     <dl>
       <dt>Pedido</dt><dd>Qualquer ajuste aberto no Jira por causa da Reforma Tributária ou de uma nota técnica: mudança de sistema, correção, análise.</dd>
@@ -413,7 +430,7 @@ body{margin:0;background:#fff}
     </dl>
   </details>
 
-  <p class="rt-foot" id="rodape">Fonte: Jira Linx. Pedidos com "reforma tributária", IBS, CBS, "NT 2025", "NT 2026" ou "nota técnica" no título, criados desde 01/01/2025. Atualizado automaticamente nos dias úteis.</p>
+  <p class="rt-foot" id="rodape" data-ptab-panel="pedidos">Fonte: Jira Linx. Pedidos com "reforma tributária", IBS, CBS, "NT 2025", "NT 2026" ou "nota técnica" no título, criados desde 01/01/2025. Atualizado automaticamente nos dias úteis.</p>
 </div>
 
 <script>
@@ -891,6 +908,21 @@ dash.draw('evolucao', (el) => {
   function render() {
     const b = base(); const cont = { todos: b.length, venc: 0, sem: 0, prox: 0, ent: 0 }; b.forEach((r) => cont[r.sit]++);
     const tabs = $('#cli-tabs'); tabs.replaceChildren(...TABS.map(([k, t]) => { const bt = el('button'); bt.type = 'button'; bt.setAttribute('role', 'tab'); bt.setAttribute('aria-selected', String(st.tab === k)); bt.append(t + ' '); bt.append(el('i', '', cont[k])); bt.onclick = () => { st.tab = k; render(); }; return bt; }));
+    const kp = $('#cli-kpis');
+    if (kp) {
+      const KPIS = [
+        ['todos', 'Clientes acompanhados', new Set(b.map((r) => r.cliente)).size, 'Consultar clientes', ''],
+        ['prox', 'Entregas com previsão', cont.prox, 'Acompanhar próximos prazos', 'var(--cds-chart-categorical-1)'],
+        ['sem', 'Sem previsão', cont.sem, 'Solicitar posicionamento', 'var(--color-warn)'],
+        ['venc', 'Prazos vencidos', cont.venc, 'Revisar compromissos', 'var(--color-bad)']];
+      kp.replaceChildren(...KPIS.map(([k, lb, v, acao, cor]) => {
+        const bt = el('button', 'rt-card rt-tile rt-kpi'); bt.type = 'button'; bt.setAttribute('aria-pressed', String(st.tab === k));
+        const nn = el('div', 'rt-n', String(v)); if (cor && v) nn.style.color = cor;
+        bt.append(el('div', 'rt-l', lb), nn, el('div', 'rt-kpi-a', acao + ' ›'));
+        bt.onclick = () => { st.tab = k; if (k === 'todos') st.grp = true; render(); const s = $('#clientes'); if (s) s.scrollIntoView({ behavior: 'smooth', block: 'start' }); if (k === 'todos') { const q = $('#cli-q'); if (q) q.focus({ preventScroll: true }); } };
+        return bt;
+      }));
+    }
     const rs = filtrados();
     $('#cli-n').textContent = new Set(rs.map((r) => r.cliente)).size + ' cliente(s) · ' + rs.length + ' entrega(s)';
     $('#cli-grp').setAttribute('aria-pressed', String(st.grp));
@@ -925,6 +957,22 @@ dash.draw('evolucao', (el) => {
   render();
 })();
 </script>
-</div></div><script>(function(){const sh=document.querySelector('.rt-shell');const pinta=()=>requestAnimationFrame(()=>{document.body.style.background=getComputedStyle(sh).backgroundColor;});pinta();new MutationObserver(pinta).observe(document.documentElement,{attributes:true,attributeFilter:['data-mode']});matchMedia('(prefers-color-scheme: dark)').addEventListener('change',pinta);})();</script>
+<script>
+(function(){
+  const nav = document.getElementById('ptabs'); if (!nav) return;
+  const paineis = [...document.querySelectorAll('[data-ptab-panel]')];
+  const chave = 'rt-aba';
+  const mostrar = (aba, rolar) => {
+    nav.querySelectorAll('[data-ptab]').forEach((b) => b.setAttribute('aria-selected', String(b.dataset.ptab === aba)));
+    paineis.forEach((p) => { const on = p.dataset.ptabPanel.split(' ').includes(aba); p.classList.toggle('rt-off', !on); if (on) p.removeAttribute('inert'); else p.setAttribute('inert', ''); });
+    try { localStorage.setItem(chave, aba); } catch (e) {}
+    if (rolar) nav.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+  nav.addEventListener('click', (e) => { const b = e.target.closest('[data-ptab]'); if (b) mostrar(b.dataset.ptab, true); });
+  nav.addEventListener('keydown', (e) => { if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return; const bs = [...nav.querySelectorAll('[data-ptab]')]; const i = bs.findIndex((b) => b.getAttribute('aria-selected') === 'true'); const j = (i + (e.key === 'ArrowRight' ? 1 : bs.length - 1)) % bs.length; bs[j].focus(); mostrar(bs[j].dataset.ptab, false); });
+  let ini = 'clientes'; try { const s = localStorage.getItem(chave); if (s && nav.querySelector('[data-ptab="' + s + '"]')) ini = s; } catch (e) {}
+  mostrar(ini, false);
+})();
+</script></div></div><script>(function(){const sh=document.querySelector('.rt-shell');const pinta=()=>requestAnimationFrame(()=>{document.body.style.background=getComputedStyle(sh).backgroundColor;});pinta();new MutationObserver(pinta).observe(document.documentElement,{attributes:true,attributeFilter:['data-mode']});matchMedia('(prefers-color-scheme: dark)').addEventListener('change',pinta);})();</script>
 </body>
 </html>
