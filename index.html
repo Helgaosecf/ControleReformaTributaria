@@ -177,11 +177,11 @@ body{margin:0;background:#fff}
 .rt-link{font:inherit;font-size:12.5px;color:var(--cds-chart-categorical-1);background:none;border:0;padding:2px 0;cursor:pointer}
 .rt-link[aria-pressed="true"]{font-weight:600;text-decoration:underline}
 .rt-cli{padding:0;overflow:hidden}
-.rt-cli-busca{display:grid;grid-template-columns:minmax(0,1fr) auto auto auto;gap:10px;padding:16px 16px 0;align-items:center}
+.rt-cli-busca{display:grid;grid-template-columns:minmax(0,1fr) auto auto auto auto;gap:10px;padding:16px 16px 0;align-items:center}
 .rt-search{display:flex;align-items:center;gap:8px;background:var(--color-bg);border:1px solid var(--color-border-line);border-radius:10px;padding:0 10px;color:var(--color-fg-muted);min-width:0}
 .rt-search input{flex:1;min-width:0;border:0;background:transparent;font:inherit;font-size:14px;color:var(--color-fg);padding:9px 0;outline:none}
 .rt-search kbd{font:inherit;font-size:11px;border:1px solid var(--color-border-line);border-radius:5px;padding:0 5px;color:var(--color-fg-muted)}
-.rt-cli-busca select{height:38px!important;min-width:170px}
+.rt-cli-busca select{height:38px!important;min-width:150px}@media (max-width:1240px) and (min-width:901px){.rt-cli-busca{grid-template-columns:repeat(3,minmax(0,1fr)) auto}.rt-search{grid-column:1/-1}.rt-cli-busca select{min-width:0;width:100%}}
 .rt-cli-dt input{height:38px}
 .rt-tabs{display:flex;gap:22px;padding:14px 16px 0;border-bottom:1px solid var(--color-border-line);overflow-x:auto}
 .rt-tabs button{font:inherit;font-size:13px;color:var(--color-fg-muted);background:none;border:0;border-bottom:2px solid transparent;padding:6px 2px 10px;cursor:pointer;white-space:nowrap;display:inline-flex;gap:6px;align-items:center}
@@ -263,7 +263,7 @@ body{margin:0;background:#fff}
       <div class="rt-cli-busca">
         <label class="rt-search"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M13 13l4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><input type="search" id="cli-q" placeholder="Buscar cliente, produto ou Nota Técnica" aria-label="Buscar cliente, produto ou Nota Técnica"><kbd>/</kbd></label>
         <select class="dash-select" id="cli-prod" aria-label="Produto"></select>
-        <select class="dash-select" id="cli-nt" aria-label="Nota Técnica"></select>
+        <select class="dash-select" id="cli-nt" aria-label="Nota Técnica"></select><select class="dash-select" id="cli-sit" aria-label="Situação"></select>
         <div class="rt-dates rt-cli-dt"><input type="date" id="cli-de" aria-label="Entrega a partir de"><input type="date" id="cli-ate" aria-label="Entrega até"></div>
       </div>
       <div class="rt-tabs" role="tablist" id="cli-tabs"></div>
@@ -843,16 +843,18 @@ dash.draw('evolucao', (el) => {
     const feito = /entregue/i.test(m.status || '');
     itens.push(montar({ chave: 'MANUAL-' + (n + 1), epico: m.epico || '', cliente: m.cliente || 'Sem cliente', produto: m.produto || '—', nt: m.nt || '—', demanda: m.demanda || '', fim: '', replan: '', prev: m.previsao || '', status: m.status || '', legal: '', refs: [], epFeito: feito, epResolvido: feito ? (m.previsao || '') : '', rotBase: m.status || 'Planejado', hs: [], fonte: 'manual', origem: m.fonte || '', nota: m.obs || '' }));
   });
-  const st = { tab: 'todos', q: '', prod: '', nt: '', de: '', ate: '', grp: false, atencao: true, sel: null };
+  const st = { tab: 'todos', q: '', prod: '', nt: '', sit: '', de: '', ate: '', grp: false, atencao: true, sel: null };
   const TABS = [['todos', 'Todos'], ['venc', 'Prazo vencido'], ['sem', 'Sem previsão'], ['prox', 'Próximas entregas'], ['ent', 'Entregues']];
   const norm = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
-  const base = () => itens.filter((r) => (!st.prod || r.produto === st.prod) && (!st.nt || r.nt === st.nt) && (!st.de || (r.data && r.data >= st.de)) && (!st.ate || (r.data && r.data <= st.ate)) && (!st.q || norm([r.cliente, r.produto, r.nt, r.demanda, r.chave].join(' ')).includes(norm(st.q))));
+  const base = () => itens.filter((r) => (!st.prod || r.produto === st.prod) && (!st.nt || r.nt === st.nt) && (!st.sit || r.rot === st.sit) && (!st.de || (r.data && r.data >= st.de)) && (!st.ate || (r.data && r.data <= st.ate)) && (!st.q || norm([r.cliente, r.produto, r.nt, r.demanda, r.chave].join(' ')).includes(norm(st.q))));
   const peso = { venc: 0, sem: 1, prox: 2, ent: 3 };
   const ordena = (rs) => rs.sort((a, b) => (st.grp ? a.cliente.localeCompare(b.cliente, 'pt-BR') : 0) || (st.atencao ? peso[a.sit] - peso[b.sit] : 0) || (a.sit === 'ent' && b.sit === 'ent' ? (b.resolvido || b.data || '').localeCompare(a.resolvido || a.data || '') : (a.data || '9999').localeCompare(b.data || '9999')) || a.cliente.localeCompare(b.cliente, 'pt-BR'));
   const filtrados = () => ordena(base().filter((r) => st.tab === 'todos' || r.sit === st.tab));
   const opts = (sel, todos, vals) => { const v = sel.value; sel.replaceChildren(new Option(todos, ''), ...vals.map((x) => new Option(x, x))); sel.value = vals.includes(v) ? v : ''; };
   opts($('#cli-prod'), 'Todos os produtos', [...new Set(itens.map((r) => r.produto))].sort((a, b) => a.localeCompare(b, 'pt-BR')));
   opts($('#cli-nt'), 'Todas as NTs', [...new Set(itens.map((r) => r.nt))].sort());
+  const ORDSIT = ['Prazo vencido', 'Sem previsão', 'Na fila', 'Em análise', 'Em desenvolvimento', 'Em teste', 'Aguardando pacote', 'Entregue em parte', 'Planejado', 'Planejada', 'Entregue'];
+  opts($('#cli-sit'), 'Todas as situações', [...new Set(itens.map((r) => r.rot))].sort((a, b) => ((ORDSIT.indexOf(a) + 1) || 99) - ((ORDSIT.indexOf(b) + 1) || 99) || a.localeCompare(b, 'pt-BR')));
   const dtxt = (r) => { if (r.feito) return 'Entregue' + (r.resolvido ? ' em ' + R.dataBR(r.resolvido) : ''); if (!r.data) return 'Nova previsão não definida'; const n = R.dias(r.data); return n < 0 ? (-n) + (n === -1 ? ' dia' : ' dias') + ' de atraso' : n === 0 ? 'Vence hoje' : 'Faltam ' + n + (n === 1 ? ' dia' : ' dias'); };
   const el = (t, c, txt) => { const e = document.createElement(t); if (c) e.className = c; if (txt != null) e.textContent = txt; return e; };
   const lnk = (k) => { const a = el('a', '', k + ' ↗'); a.href = 'https://jira.linx.com.br/browse/' + encodeURIComponent(k); a.target = '_blank'; a.rel = 'noopener'; a.title = 'Abrir ' + k + ' no Jira'; return a; };
@@ -948,12 +950,13 @@ dash.draw('evolucao', (el) => {
   $('#cli-q').addEventListener('input', (e) => { st.q = e.target.value.trim(); render(); });
   $('#cli-prod').addEventListener('change', (e) => { st.prod = e.target.value; render(); });
   $('#cli-nt').addEventListener('change', (e) => { st.nt = e.target.value; render(); });
+  $('#cli-sit').addEventListener('change', (e) => { st.sit = e.target.value; render(); });
   $('#cli-de').addEventListener('change', (e) => { st.de = e.target.value; render(); });
   $('#cli-ate').addEventListener('change', (e) => { st.ate = e.target.value; render(); });
   $('#cli-grp').addEventListener('click', () => { st.grp = !st.grp; render(); });
   $('#cli-ord').addEventListener('click', () => { st.atencao = !st.atencao; render(); });
   $('#cli-exp').addEventListener('click', exportar);
-  $('#cli-limpar').addEventListener('click', () => { Object.assign(st, { tab: 'todos', q: '', prod: '', nt: '', de: '', ate: '' }); ['#cli-q', '#cli-prod', '#cli-nt', '#cli-de', '#cli-ate'].forEach((s) => { $(s).value = ''; }); render(); });
+  $('#cli-limpar').addEventListener('click', () => { Object.assign(st, { tab: 'todos', q: '', prod: '', nt: '', sit: '', de: '', ate: '' }); ['#cli-q', '#cli-prod', '#cli-nt', '#cli-sit', '#cli-de', '#cli-ate'].forEach((s) => { $(s).value = ''; }); render(); });
   document.addEventListener('keydown', (e) => { if (e.key === '/' && !/input|select|textarea/i.test((document.activeElement || {}).tagName || '')) { e.preventDefault(); $('#cli-q').focus(); } });
   render();
 })();
