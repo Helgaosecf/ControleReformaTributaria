@@ -221,7 +221,7 @@ body{margin:0;background:#fff}
 .rt-cp-card details{border-top:1px solid var(--color-border-line);padding-top:8px;font-size:12.5px}
 .rt-cp-card details summary{cursor:pointer;color:var(--cds-chart-categorical-1);font-weight:500}
 .rt-cp-card details p{margin:6px 0 0;color:var(--color-fg-muted);line-height:1.45}
-.rt-cp-vazio{font-size:13px;color:var(--color-fg-muted)}
+.rt-cp-card a{color:var(--cds-chart-categorical-1);text-decoration:none;font-weight:600}.rt-cp-card a:hover{text-decoration:underline}.rt-cp-vazio{font-size:13px;color:var(--color-fg-muted)}
 .rt-cli-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:10px 16px;border-top:1px solid var(--color-border-line);font-size:12px;color:var(--color-fg-muted)}
 .rt-toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--color-fg);color:var(--color-bg);font-size:13px;padding:8px 14px;border-radius:10px;z-index:20;opacity:0;transition:opacity .2s;pointer-events:none}
 .rt-toast.on{opacity:1}
@@ -855,6 +855,7 @@ dash.draw('evolucao', (el) => {
   opts($('#cli-nt'), 'Todas as NTs', [...new Set(itens.map((r) => r.nt))].sort());
   const dtxt = (r) => { if (r.feito) return 'Entregue' + (r.resolvido ? ' em ' + R.dataBR(r.resolvido) : ''); if (!r.data) return 'Nova previsão não definida'; const n = R.dias(r.data); return n < 0 ? (-n) + (n === -1 ? ' dia' : ' dias') + ' de atraso' : n === 0 ? 'Vence hoje' : 'Faltam ' + n + (n === 1 ? ' dia' : ' dias'); };
   const el = (t, c, txt) => { const e = document.createElement(t); if (c) e.className = c; if (txt != null) e.textContent = txt; return e; };
+  const lnk = (k) => { const a = el('a', '', k + ' ↗'); a.href = 'https://jira.linx.com.br/browse/' + encodeURIComponent(k); a.target = '_blank'; a.rel = 'noopener'; a.title = 'Abrir ' + k + ' no Jira'; return a; };
   function painel(rs) {
     const p = $('#cli-painel'); p.replaceChildren();
     const r = rs.find((x) => x.chave === st.sel) || rs[0];
@@ -875,13 +876,13 @@ dash.draw('evolucao', (el) => {
         const cel = (lb, v) => { const k = el('div', '', lb); k.append(el('b', '', v)); g.append(k); };
         cel('Data no épico (End Date)', x.fim ? R.dataBR(x.fim) : '—'); cel('Prazo legal da norma', x.legal ? R.dataBR(x.legal) : 'Sem data oficial');
         if (x.replan) cel('Replanejada para', R.dataBR(x.replan));
-        cel('Situação no Jira', x.fonte === 'manual' ? 'Sem item no Jira' : x.status); cel('Código do épico', x.epico || 'Sem épico no Jira');
+        cel('Situação no Jira', x.fonte === 'manual' ? 'Sem item no Jira' : x.status); if (x.epico) { const k = el('div', '', 'Código do épico'); const bb = el('b'); bb.append(lnk(x.epico)); k.append(bb); g.append(k); } else cel('Código do épico', 'Sem épico no Jira');
         if (x.versoes.length) cel('Versão liberada', x.versoes.join(', '));
         c.append(g);
         if (x.nota) c.append(el('div', 'rt-cp-dl', 'Observação: ' + x.nota));
         if (x.fonte === 'manual') c.append(el('div', 'rt-cp-dl', 'Fonte: ' + (x.origem || 'controle manual') + '. Data informada fora do Jira.'));
-        if (x.hs.length) { const dh = el('details'); dh.append(el('summary', '', 'Itens no Jira (' + x.hs.length + ')')); x.hs.forEach((h) => dh.append(el('p', '', h.chave + ' · ' + (h.cat === 'done' ? 'Concluída' + (h.resolvido ? ' em ' + R.dataBR(h.resolvido) : '') : h.status) + (h.versao ? ' · ' + h.versao : '') + ' · ' + h.resumo))); c.append(dh); }
-        if (x.refs.length) { const dt = el('details'); dt.append(el('summary', '', 'Referência técnica')); x.refs.forEach((rf) => dt.append(el('p', '', rf.chave + ' · ' + rf.titulo))); c.append(dt); }
+        if (x.hs.length) { const dh = el('details'); dh.append(el('summary', '', 'Itens no Jira (' + x.hs.length + ')')); x.hs.forEach((h) => { const pp = el('p'); pp.append(lnk(h.chave), ' · ' + (h.cat === 'done' ? 'Concluída' + (h.resolvido ? ' em ' + R.dataBR(h.resolvido) : '') : h.status) + (h.versao ? ' · ' + h.versao : '') + ' · ' + h.resumo); dh.append(pp); }); c.append(dh); }
+        if (x.refs.length) { const dt = el('details'); dt.append(el('summary', '', 'Referência técnica')); x.refs.forEach((rf) => { const pp = el('p'); pp.append(lnk(rf.chave), ' · ' + rf.titulo); dt.append(pp); }); c.append(dt); }
       } else {
         c.append(el('div', 'rt-cp-dl', (x.data ? R.dataBR(x.data) : 'A definir') + ' · ' + dtxt(x)));
       }
