@@ -159,6 +159,74 @@ body{margin:0;background:#fff}
 .rt-gloss dt{font-weight:600}
 .rt-gloss dd{margin:0;color:var(--color-fg-muted)}
 @media (max-width:560px){.rt-gloss dl{grid-template-columns:1fr}.rt-field select{min-width:0;width:100%}.rt-filters{position:static}}
+
+.rt-ict td.rt-pr{font-size:12.5px;color:var(--color-fg-muted);max-width:240px}
+.rt-ict td.rt-pr b{color:var(--color-fg)}
+.rt-ict td.rt-pr details summary{cursor:pointer;list-style:none}
+.rt-ict td.rt-pr details summary::-webkit-details-marker{display:none}
+.rt-ict td.rt-pr details summary span{color:var(--cds-chart-categorical-1)}
+.rt-ict td.rt-pr details p{margin:6px 0 0;line-height:1.5}
+@media (max-width:640px){.rt-shell .rt-ict td:nth-child(2)::before{content:"Produtos"}.rt-shell .rt-ict td:nth-child(3)::before{content:"Situação"}.rt-shell .rt-ict td:nth-child(4)::before{content:"Urgência"}.rt-shell .rt-ict td:nth-child(5)::before{content:"Início dos efeitos"}.rt-shell .rt-ict td:nth-child(6)::before{content:"Entrega prevista"}.rt-shell .rt-ict td:nth-child(7)::before{content:"Código no Jira"}.rt-shell .rt-ict td:nth-child(6) *{text-align:left!important;justify-items:start!important}.rt-shell .rt-ict td.rt-pr{max-width:none}}
+
+.rt-cli-top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+.rt-btn{font:inherit;font-size:14px;font-weight:500;color:var(--color-fg);background:var(--color-panel);border:1px solid var(--color-border-line);border-radius:10px;padding:9px 14px;cursor:pointer;white-space:nowrap}
+.rt-btn:hover{background:var(--color-bg)}
+.rt-btn-s{font-size:12.5px;padding:5px 10px;border-radius:8px}
+.rt-btn-p{background:var(--cds-chart-categorical-1);border-color:transparent;color:#fff;font-weight:600}
+.rt-btn-p:hover{background:var(--cds-chart-categorical-1);filter:brightness(1.08)}
+.rt-link{font:inherit;font-size:12.5px;color:var(--cds-chart-categorical-1);background:none;border:0;padding:2px 0;cursor:pointer}
+.rt-link[aria-pressed="true"]{font-weight:600;text-decoration:underline}
+.rt-cli{padding:0;overflow:hidden}
+.rt-cli-busca{display:grid;grid-template-columns:minmax(0,1fr) auto auto auto;gap:10px;padding:16px 16px 0;align-items:center}
+.rt-search{display:flex;align-items:center;gap:8px;background:var(--color-bg);border:1px solid var(--color-border-line);border-radius:10px;padding:0 10px;color:var(--color-fg-muted);min-width:0}
+.rt-search input{flex:1;min-width:0;border:0;background:transparent;font:inherit;font-size:14px;color:var(--color-fg);padding:9px 0;outline:none}
+.rt-search kbd{font:inherit;font-size:11px;border:1px solid var(--color-border-line);border-radius:5px;padding:0 5px;color:var(--color-fg-muted)}
+.rt-cli-busca select{height:38px!important;min-width:170px}
+.rt-cli-dt input{height:38px}
+.rt-tabs{display:flex;gap:22px;padding:14px 16px 0;border-bottom:1px solid var(--color-border-line);overflow-x:auto}
+.rt-tabs button{font:inherit;font-size:13px;color:var(--color-fg-muted);background:none;border:0;border-bottom:2px solid transparent;padding:6px 2px 10px;cursor:pointer;white-space:nowrap;display:inline-flex;gap:6px;align-items:center}
+.rt-tabs button i{font-style:normal;font-size:11px;background:var(--color-border-line);border-radius:6px;padding:1px 6px;color:var(--color-fg-muted)}
+.rt-tabs button[aria-selected="true"]{color:var(--cds-chart-categorical-1);border-bottom-color:var(--cds-chart-categorical-1);font-weight:600}
+.rt-tabs button[aria-selected="true"] i{background:color-mix(in srgb,var(--cds-chart-categorical-1) 15%,transparent);color:var(--cds-chart-categorical-1)}
+.rt-cli-grid{display:grid;grid-template-columns:minmax(0,1.85fr) minmax(280px,1fr)}
+.rt-cli-lista{min-width:0;border-right:1px solid var(--color-border-line)}
+.rt-cli-meta{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:12px 16px;font-size:12px;color:var(--color-fg-muted);border-bottom:1px solid var(--color-border-line)}
+.rt-cli-acts{display:flex;gap:14px}
+.rt-cli-tw{max-height:560px}
+.rt-cli-t tbody tr{cursor:pointer}
+.rt-cli-t tbody tr:hover td{background:color-mix(in srgb,var(--color-fg) 3%,transparent)}
+.rt-cli-t tbody tr.rt-sel td{background:color-mix(in srgb,var(--cds-chart-categorical-1) 9%,transparent)}
+.rt-cli-t td{padding:12px 10px}
+.rt-cli-t td:first-child,.rt-cli-t th:first-child{padding-left:16px}
+.rt-cli-t .rt-c1 b{display:block;font-size:13.5px}
+.rt-cli-t .rt-c1 span,.rt-cli-t .rt-c2 span,.rt-cli-t .rt-c3 span{display:block;font-size:12px;color:var(--color-fg-muted);margin-top:3px}
+.rt-cli-t .rt-c1 span{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;max-width:340px}
+.rt-cli-t .rt-c3 b{font-variant-numeric:tabular-nums}
+.rt-cli-t tr.rt-g td{background:var(--color-bg);font-size:12px;font-weight:600;color:var(--color-fg-muted);padding:6px 16px;cursor:default}
+.rt-st{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;white-space:nowrap}
+.rt-st::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.rt-cli-painel{padding:16px;display:grid;gap:12px;align-content:start;background:color-mix(in srgb,var(--color-bg) 60%,var(--color-panel))}
+.rt-cp-lbl{font-size:11px;font-weight:600;letter-spacing:.08em;color:var(--color-fg-muted);text-transform:uppercase}
+.rt-cp-head{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.rt-cp-nome{font-size:24px;font-weight:700;letter-spacing:-.02em;margin:0}
+.rt-cp-sub{font-size:12.5px;color:var(--color-fg-muted);margin:-6px 0 0}
+.rt-cp-card{background:var(--color-panel);border:1px solid var(--color-border-line);border-radius:12px;padding:14px;display:grid;gap:8px}
+.rt-cp-card+.rt-cp-card{margin-top:2px}
+.rt-cp-top{display:flex;justify-content:space-between;gap:8px;font-size:11.5px;font-weight:600;color:var(--color-fg-muted)}
+.rt-cp-dem{font-size:15px;font-weight:600;line-height:1.3}
+.rt-cp-dl{font-size:12.5px;color:var(--color-fg-muted)}
+.rt-cp-data{font-size:30px;font-weight:700;letter-spacing:-.03em;line-height:1.05;font-variant-numeric:tabular-nums}
+.rt-cp-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;border-top:1px solid var(--color-border-line);padding-top:10px;font-size:12px;color:var(--color-fg-muted)}
+.rt-cp-grid b{display:block;color:var(--color-fg);font-size:13px;margin-top:2px}
+.rt-cp-card details{border-top:1px solid var(--color-border-line);padding-top:8px;font-size:12.5px}
+.rt-cp-card details summary{cursor:pointer;color:var(--cds-chart-categorical-1);font-weight:500}
+.rt-cp-card details p{margin:6px 0 0;color:var(--color-fg-muted);line-height:1.45}
+.rt-cp-vazio{font-size:13px;color:var(--color-fg-muted)}
+.rt-cli-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:10px 16px;border-top:1px solid var(--color-border-line);font-size:12px;color:var(--color-fg-muted)}
+.rt-toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--color-fg);color:var(--color-bg);font-size:13px;padding:8px 14px;border-radius:10px;z-index:20;opacity:0;transition:opacity .2s;pointer-events:none}
+.rt-toast.on{opacity:1}
+@media (max-width:900px){.rt-cli-grid{grid-template-columns:1fr}.rt-cli-lista{border-right:0;border-bottom:1px solid var(--color-border-line)}.rt-cli-busca{grid-template-columns:1fr 1fr}.rt-search{grid-column:1/-1}.rt-cli-dt{grid-column:1/-1}.rt-cli-busca select{min-width:0;width:100%}}
+@media (max-width:640px){.rt-shell .rt-cli{padding:0}.rt-shell .rt-cli-t td:nth-child(2)::before{content:"Produto / NT"}.rt-shell .rt-cli-t td:nth-child(3)::before{content:"Entrega"}.rt-shell .rt-cli-t td:nth-child(4)::before{content:"Situação"}.rt-shell .rt-cli-t td:first-child{padding-left:0}.rt-shell .rt-cli-t tbody tr{padding:12px 16px}.rt-shell .rt-cli-t tr.rt-g{padding:0}.rt-shell .rt-cli-t tr.rt-g td{display:block}.rt-shell .rt-cli-t tr.rt-g td::before{content:none}.rt-cli-dt input{flex:1;min-width:0}}
 </style>
 
 <div class="rt">
@@ -167,6 +235,36 @@ body{margin:0;background:#fff}
     <h1 class="rt-title">Como estamos na Reforma Tributária</h1>
     <p class="rt-lede">Nos <span data-draw="periodo-txt">—</span>, chegaram <b data-draw="l-cheg" data-source="resumo" data-field="chegaram" data-row="0" class="dash-skeleton"></b> pedidos de ajuste e <b data-draw="l-res" data-source="resumo" data-field="resolvidos" data-row="0" class="dash-skeleton"></b> foram resolvidos. Hoje há <b data-draw="l-pen" data-source="resumo" data-field="pendentes" data-row="0" class="dash-skeleton"></b> pedidos pendentes, e <b data-draw="l-urg" data-source="resumo" data-field="urgentes" data-row="0" class="dash-skeleton"></b> deles são urgentes.</p>
   </header>
+
+
+  <section class="rt-sec" id="clientes">
+    <div class="rt-cli-top">
+      <div><h2 class="rt-h2">Entregas por cliente</h2><p class="rt-sub">Encontre o cliente e veja o que será entregue, quando e em que situação está.</p></div>
+      <button type="button" class="rt-btn" id="cli-exp">Exportar consulta ↓</button>
+    </div>
+    <div class="rt-card rt-cli">
+      <div class="rt-cli-busca">
+        <label class="rt-search"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M13 13l4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><input type="search" id="cli-q" placeholder="Buscar cliente, produto ou Nota Técnica" aria-label="Buscar cliente, produto ou Nota Técnica"><kbd>/</kbd></label>
+        <select class="dash-select" id="cli-prod" aria-label="Produto"></select>
+        <select class="dash-select" id="cli-nt" aria-label="Nota Técnica"></select>
+        <div class="rt-dates rt-cli-dt"><input type="date" id="cli-de" aria-label="Entrega a partir de"><input type="date" id="cli-ate" aria-label="Entrega até"></div>
+      </div>
+      <div class="rt-tabs" role="tablist" id="cli-tabs"></div>
+      <div class="rt-cli-grid">
+        <div class="rt-cli-lista">
+          <div class="rt-cli-meta"><span id="cli-n">—</span><span class="rt-cli-acts"><button type="button" class="rt-link" id="cli-grp" aria-pressed="false">Agrupar por cliente</button><button type="button" class="rt-link" id="cli-ord">Atenção primeiro ↕</button></span></div>
+          <div class="rt-tw rt-cli-tw">
+            <table class="rt-table rt-cli-t">
+              <thead><tr><th>Cliente / entrega</th><th>Produto / NT</th><th>Entrega ao cliente</th><th>Situação</th></tr></thead>
+              <tbody id="cli-body"></tbody>
+            </table>
+          </div>
+        </div>
+        <aside class="rt-cli-painel" id="cli-painel" aria-live="polite"></aside>
+      </div>
+      <div class="rt-cli-foot"><span id="cli-fonte">—</span><button type="button" class="rt-btn rt-btn-s" id="cli-limpar">Limpar filtros</button></div>
+    </div>
+  </section>
 
   <section class="rt-filters" id="filtros" aria-label="Filtros">
     <div class="rt-field">
@@ -189,6 +287,33 @@ body{margin:0;background:#fff}
         <input type="date" id="f-ate" aria-label="Data final" min="2025-01-01">
       </div>
     </div>
+  </section>
+
+
+  <section class="rt-sec" id="entregas">
+    <div><h2 class="rt-h2">Entregas das normas por produto</h2><p class="rt-sub">Normas acompanhadas pelo time de Legislação (ICT) no Jira, com a data em que passam a valer e a data prevista de entrega. Escolha um produto no filtro acima para ver só as normas que o afetam.</p></div>
+    <div class="rt-tiles">
+      <div class="rt-card rt-tile"><div class="rt-l">Normas em aberto</div><div class="rt-n" data-draw="ict-aberto">—</div><div class="rt-s">ainda sem entrega</div></div>
+      <div class="rt-card rt-tile"><div class="rt-l">Entrega atrasada</div><div class="rt-n rt-bad" data-draw="ict-atras">—</div><div class="rt-s">data prevista já passou</div></div>
+      <div class="rt-card rt-tile"><div class="rt-l">Entregam em até 30 dias</div><div class="rt-n rt-warn" data-draw="ict-30">—</div><div class="rt-s">em aberto, com data próxima</div></div>
+      <div class="rt-card rt-tile"><div class="rt-l">Entregues</div><div class="rt-n rt-ok" data-draw="ict-ok">—</div><div class="rt-s">concluídas nos últimos 20 dias</div></div>
+    </div>
+    <div class="rt-tfilters">
+      <div class="rt-field"><label for="f-ict">Situação da norma</label>
+        <select class="dash-select" id="f-ict">
+          <option value="">Em aberto</option>
+          <option value="ok">Entregues (últimos 20 dias)</option>
+          <option value="todas">Todas</option>
+        </select></div>
+      <p class="rt-help" style="margin:0 0 6px"><b>Início dos efeitos</b> é quando a norma passa a valer. <b>Entrega prevista</b> é o prazo combinado para o time entregar (OLA no Jira).</p>
+    </div>
+    <div class="rt-card rt-tw">
+      <table class="rt-table rt-ict">
+        <thead><tr><th>Norma</th><th>Produtos afetados</th><th>Situação</th><th>Urgência</th><th class="rt-center">Início dos efeitos</th><th class="rt-center">Entrega prevista</th><th>Código no Jira</th></tr></thead>
+        <tbody data-draw="ict-t"></tbody>
+      </table>
+    </div>
+    <p class="rt-foot" data-draw="ict-fonte">—</p>
   </section>
 
   <section class="rt-tiles" id="indicadores" aria-label="Indicadores">
@@ -572,6 +697,179 @@ dash.draw('evolucao', (el) => {
   svg.append('text').attr('x', x(t(last.data)) + 8).attr('y', y(last.pct_resolvido) + 4).style('fill', 'var(--color-fg)').style('font-weight', 600).text(String(last.pct_resolvido).replace('.', ',') + '%');
   svg.append('g').selectAll('text').data(rows.length > 6 ? [rows[0], last] : rows).join('text').attr('x', (r) => x(t(r.data))).attr('y', H - 6).attr('text-anchor', 'middle').text((r) => r.data.slice(8, 10) + '/' + r.data.slice(5, 7));
 });
+</script>
+<script>
+(function(){
+  const D = window.__DADOS || {}, R = window.RT;
+  const extra = { MODASP: 'Shopping SP · Linx UX', LINXERP: 'Shopping SP · Linx ERP', POSSP: 'Shopping SP · POS' };
+  const nomes = new Map((D.produtos || []).map((p) => [p.produto, p.nome]));
+  const nome = (c) => nomes.get(c) || extra[c] || c;
+  const urg = { 0: 'Muito alta', 1: 'Alta', 2: 'Média', 3: 'Baixa' };
+  const linhas = String(D.ict || '').split('\n');
+  const dataIct = (linhas[0] || '').split(' ')[1] || '';
+  const itens = linhas.slice(1).filter((l) => l && l !== '#FIM').map((l) => {
+    const [n, titulo, status, feito, pr, efeitos, entrega, resolvido, tipo, prods] = l.split('|');
+    return { chave: 'BIGRETAIL-' + n, titulo, status, feito: feito === '1', urgencia: urg[pr] || 'Baixa', efeitos, entrega, resolvido, tipo, produtos: [...new Set((prods || '').split(' ').filter(Boolean))] };
+  });
+  const doProduto = () => { const p = dash.params().produto || ''; return itens.filter((r) => !p || r.produtos.includes(p)); };
+  const abertos = () => doProduto().filter((r) => !r.feito);
+  const num = (el, n) => { el.textContent = R.fmt(n); };
+  dash.draw('ict-aberto', (el) => num(el, abertos().length));
+  dash.draw('ict-atras', (el) => num(el, abertos().filter((r) => r.entrega && R.dias(r.entrega) < 0).length));
+  dash.draw('ict-30', (el) => num(el, abertos().filter((r) => r.entrega && R.dias(r.entrega) >= 0 && R.dias(r.entrega) <= 30).length));
+  dash.draw('ict-ok', (el) => num(el, doProduto().filter((r) => r.feito).length));
+  dash.draw('ict-fonte', (el) => { el.textContent = 'Fonte: Jira Linx, painel "Acompanhamento ICT - Tech" (normas do time de Legislação em aberto e entregues nos últimos 20 dias)' + (dataIct ? ', lido em ' + R.dataBR(dataIct) : '') + '.'; });
+  const pill = (t, c) => { const s = document.createElement('span'); s.className = 'rt-pill'; s.style.color = c; s.textContent = t; return s; };
+  const caixa = (td, iso, extraEl) => { td.className = 'rt-center'; const b = document.createElement('div'); b.className = 'rt-due'; const d = document.createElement('b'); d.textContent = iso ? R.dataBR(iso) : 'Sem data'; b.appendChild(d); if (extraEl) b.appendChild(extraEl); td.appendChild(b); };
+  dash.draw('ict-t', (el) => {
+    const f = dash.params().ict || '';
+    let rows = doProduto().filter((r) => f === 'todas' ? true : f === 'ok' ? r.feito : !r.feito);
+    rows = rows.sort((a, b) => (a.feito - b.feito) || (a.feito ? (b.resolvido || '').localeCompare(a.resolvido || '') : (a.entrega || '9999').localeCompare(b.entrega || '9999')));
+    el.replaceChildren();
+    if (!rows.length) { const td = el.insertRow().insertCell(); td.colSpan = 7; td.textContent = 'Nenhuma norma com esses filtros.'; return; }
+    const prod = dash.params().produto || '';
+    rows.forEach((r) => {
+      const tr = el.insertRow();
+      tr.insertCell().textContent = r.titulo;
+      const tp = tr.insertCell(); tp.className = 'rt-pr';
+      if (prod) { tp.innerHTML = '<b></b>'; tp.firstChild.textContent = nome(prod); const s = document.createElement('div'); s.textContent = 'e mais ' + (r.produtos.length - 1) + ' produtos'; tp.appendChild(s); }
+      else { const d = document.createElement('details'); const s = document.createElement('summary'); s.innerHTML = '<b></b> produtos <span>ver</span>'; s.firstChild.textContent = r.produtos.length; const p = document.createElement('p'); p.textContent = r.produtos.map(nome).sort((a, b) => a.localeCompare(b, 'pt-BR')).join(', '); d.append(s, p); tp.appendChild(d); }
+      tr.insertCell().appendChild(pill(r.feito ? 'Entregue' : r.status, r.feito ? 'var(--color-ok)' : 'var(--color-warn)'));
+      tr.insertCell().appendChild(pill(r.urgencia, R.urgCor[r.urgencia]));
+      const ne = r.efeitos ? R.dias(r.efeitos) : null;
+      caixa(tr.insertCell(), r.efeitos, ne === null ? null : ne <= 0 ? pill('Já vale', 'var(--color-fg-muted)') : pill('Faltam ' + ne + (ne === 1 ? ' dia' : ' dias'), ne <= 30 ? 'var(--color-bad)' : 'var(--color-warn)'));
+      let st = null;
+      if (r.feito) st = pill('Entregue em ' + R.dataBR(r.resolvido || r.entrega).slice(0, 5), 'var(--color-ok)');
+      else if (r.entrega) { const n = R.dias(r.entrega); st = n < 0 ? pill('Atrasada ' + (-n) + (n === -1 ? ' dia' : ' dias'), 'var(--color-bad)') : n === 0 ? pill('Vence hoje', 'var(--color-bad)') : pill('Faltam ' + n + (n === 1 ? ' dia' : ' dias'), n <= 30 ? 'var(--color-warn)' : 'var(--color-fg-muted)'); }
+      caixa(tr.insertCell(), r.entrega, st);
+      const k = tr.insertCell(); k.className = 'rt-k'; k.textContent = r.chave;
+    });
+  });
+  document.querySelectorAll('#f-ict').forEach((s) => s.addEventListener('change', () => dash.setParams({ ict: s.value || null })));
+  dash.onData(() => { document.querySelectorAll('#f-ict').forEach((el) => { if (document.activeElement !== el) el.value = dash.params().ict || ''; }); });
+})();
+</script>
+<script>
+(function(){
+  const D = window.__DADOS || {}, R = window.RT;
+  const $ = (s) => document.querySelector(s);
+  if (!$('#clientes')) return;
+  const L = String(D.epicos || '').split('\n');
+  const dataLida = (L[0] || '').split(' ')[1] || '';
+  const iI = L.indexOf('#I'), iE = L.indexOf('#E'), iF = L.indexOf('#FIM');
+  const efeitos = {};
+  String(D.ict || '').split('\n').slice(1).forEach((l) => { const p = l.split('|'); if (p.length > 6) efeitos['BIGRETAIL-' + p[0]] = p[5]; });
+  const ini = {};
+  L.slice(iI + 1, iE).filter(Boolean).forEach((l) => { const [k, rest] = l.split('|'); ini[k] = (rest || '').split('^').map((x) => { const [chave, titulo] = x.split('~'); return { chave, titulo }; }); });
+  const ntDe = (ts) => { for (const t of ts) { const m = /(\d{4}\.\d{3})/.exec(t.titulo); if (m) return 'NT ' + m[1]; } const t = (ts[0] || {}).titulo || ''; const p = t.split(' - '); if (p[0].length <= 3 && p[1]) return p[1] + ' (' + p[0] + ')'; return (p[1] || p[0]).split(' ').slice(0, 5).join(' '); };
+  const limpa = (s) => { let t = s.replace(/^(?:[A-Za-zÀ-ú]+\s)(?=NF-e)/, '').replace(/^ICT\s/, ''); const p = t.split(' - '); const i = p.findIndex((x) => /Nota Técnica|^NT \d|NT 20\d\d/.test(x)); if (i >= 0 && i < p.length - 1) t = p.slice(i + 1).join(' - '); else if (i >= 0) t = t.replace(/^.*?(?:Nota Técnica|NT)\s*\d{4}\.\d{3}\s*(?:RTC)?\s*[-–]?\s*/, '') || t; else if (p.length > 1 && p[0].length <= 12) t = p.slice(1).join(' - '); t = t.replace(/^(?:Publicado a versão [\d.]+ da )/, '').replace(/\s+(?:do|da|de|dos|das|d|com|a|o|e|no|na)$/i, '').trim(); return t.charAt(0).toUpperCase() + t.slice(1); };
+  const hoje = R.hojeISO();
+  const itens = L.slice(iE + 1, iF < 0 ? undefined : iF).filter(Boolean).map((l) => {
+    const [chave, resumo, cliente, produto, fim, replan, status, cat, resolvido, epst, ik] = l.split('|');
+    const refs = ini[ik] || [];
+    const legal = refs.map((r) => efeitos[r.chave]).filter(Boolean).sort()[0] || '';
+    const feito = cat === 'done' || epst === 'Finalizado';
+    const data = replan && replan !== fim ? replan : fim;
+    let sit;
+    if (feito) sit = 'ent'; else if (!data) sit = 'sem'; else if (data < hoje) sit = 'venc'; else sit = 'prox';
+    const rot = feito ? 'Entregue' : sit === 'sem' ? 'Sem previsão' : sit === 'venc' ? 'Prazo vencido' : (/doing|progress|desenv|andamento/i.test(status) ? 'Em desenvolvimento' : /valid|homolog|teste|qa/i.test(status) ? 'Em homologação' : 'Planejado');
+    const cor = { ent: 'var(--color-ok)', sem: 'var(--color-warn)', venc: 'var(--color-bad)', prox: 'var(--cds-chart-categorical-1)' }[sit];
+    return { chave, demanda: limpa(resumo), cliente: cliente || 'Sem cliente', produto: produto || '—', nt: ntDe(refs), fim, replan: replan && replan !== fim ? replan : '', data, resolvido, status, feito, sit, rot, cor, legal, refs };
+  });
+  const st = { tab: 'todos', q: '', prod: '', nt: '', de: '', ate: '', grp: false, atencao: true, sel: null };
+  const TABS = [['todos', 'Todos'], ['venc', 'Prazo vencido'], ['sem', 'Sem previsão'], ['prox', 'Próximas entregas'], ['ent', 'Entregues']];
+  const norm = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+  const base = () => itens.filter((r) => (!st.prod || r.produto === st.prod) && (!st.nt || r.nt === st.nt) && (!st.de || (r.data && r.data >= st.de)) && (!st.ate || (r.data && r.data <= st.ate)) && (!st.q || norm([r.cliente, r.produto, r.nt, r.demanda, r.chave].join(' ')).includes(norm(st.q))));
+  const peso = { venc: 0, sem: 1, prox: 2, ent: 3 };
+  const ordena = (rs) => rs.sort((a, b) => (st.grp ? a.cliente.localeCompare(b.cliente, 'pt-BR') : 0) || (st.atencao ? peso[a.sit] - peso[b.sit] : 0) || (a.sit === 'ent' && b.sit === 'ent' ? (b.resolvido || b.data || '').localeCompare(a.resolvido || a.data || '') : (a.data || '9999').localeCompare(b.data || '9999')) || a.cliente.localeCompare(b.cliente, 'pt-BR'));
+  const filtrados = () => ordena(base().filter((r) => st.tab === 'todos' || r.sit === st.tab));
+  const opts = (sel, todos, vals) => { const v = sel.value; sel.replaceChildren(new Option(todos, ''), ...vals.map((x) => new Option(x, x))); sel.value = vals.includes(v) ? v : ''; };
+  opts($('#cli-prod'), 'Todos os produtos', [...new Set(itens.map((r) => r.produto))].sort((a, b) => a.localeCompare(b, 'pt-BR')));
+  opts($('#cli-nt'), 'Todas as NTs', [...new Set(itens.map((r) => r.nt))].sort());
+  const dtxt = (r) => { if (r.feito) return 'Entregue' + (r.resolvido ? ' em ' + R.dataBR(r.resolvido) : ''); if (!r.data) return 'Nova previsão não definida'; const n = R.dias(r.data); return n < 0 ? (-n) + (n === -1 ? ' dia' : ' dias') + ' de atraso' : n === 0 ? 'Vence hoje' : 'Faltam ' + n + (n === 1 ? ' dia' : ' dias'); };
+  const el = (t, c, txt) => { const e = document.createElement(t); if (c) e.className = c; if (txt != null) e.textContent = txt; return e; };
+  function painel(rs) {
+    const p = $('#cli-painel'); p.replaceChildren();
+    const r = rs.find((x) => x.chave === st.sel) || rs[0];
+    if (!r) { p.append(el('div', 'rt-cp-lbl', 'Cliente selecionado'), el('p', 'rt-cp-vazio', 'Nenhuma entrega com esses filtros.')); return; }
+    st.sel = r.chave;
+    const doCli = rs.filter((x) => x.cliente === r.cliente);
+    const head = el('div', 'rt-cp-head'); head.append(el('h3', 'rt-cp-nome', r.cliente));
+    const cp = el('button', 'rt-btn rt-btn-p rt-btn-s', 'Copiar posição'); cp.type = 'button'; cp.onclick = () => copiar(r.cliente, doCli); head.append(cp);
+    p.append(el('div', 'rt-cp-lbl', 'Cliente selecionado'), head, el('p', 'rt-cp-sub', doCli.length + (doCli.length === 1 ? ' entrega' : ' entregas') + ' nesta consulta'));
+    [r, ...doCli.filter((x) => x !== r)].forEach((x, i) => {
+      const c = el('div', 'rt-cp-card');
+      const top = el('div', 'rt-cp-top'); top.append(el('span', '', x.produto + ' · ' + x.nt)); const s = el('span', 'rt-st', x.rot); s.style.color = x.cor; top.append(s);
+      c.append(top, el('div', 'rt-cp-dem', x.demanda));
+      if (i === 0) {
+        c.append(el('div', 'rt-cp-dl', x.sit === 'venc' ? 'Último prazo informado' : x.feito ? 'Data planejada' : x.replan ? 'Nova previsão' : 'Entrega ao cliente'));
+        const d = el('div', 'rt-cp-data', x.data ? R.dataBR(x.data) : 'A definir'); d.style.color = x.sit === 'venc' ? 'var(--color-bad)' : x.sit === 'sem' ? 'var(--color-warn)' : x.feito ? 'var(--color-ok)' : ''; c.append(d, el('div', 'rt-cp-dl', dtxt(x)));
+        const g = el('div', 'rt-cp-grid');
+        const cel = (lb, v) => { const k = el('div', '', lb); k.append(el('b', '', v)); g.append(k); };
+        cel('Data no épico (End Date)', x.fim ? R.dataBR(x.fim) : '—'); cel('Prazo legal da norma', x.legal ? R.dataBR(x.legal) : 'Sem data oficial');
+        if (x.replan) cel('Replanejada para', R.dataBR(x.replan));
+        cel('Situação no Jira', x.status); cel('Código do épico', x.chave);
+        c.append(g);
+        if (x.refs.length) { const dt = el('details'); dt.append(el('summary', '', 'Referência técnica')); x.refs.forEach((rf) => dt.append(el('p', '', rf.chave + ' · ' + rf.titulo))); c.append(dt); }
+      } else {
+        c.append(el('div', 'rt-cp-dl', (x.data ? R.dataBR(x.data) : 'A definir') + ' · ' + dtxt(x)));
+      }
+      p.append(c);
+    });
+  }
+  function toast(t) { let e = $('.rt-toast'); if (!e) { e = el('div', 'rt-toast'); document.body.appendChild(e); } e.textContent = t; e.classList.add('on'); clearTimeout(e._t); e._t = setTimeout(() => e.classList.remove('on'), 1800); }
+  function copiar(cli, rs) {
+    const txt = 'Posição de entregas · ' + cli + ' · ' + R.dataBR(hoje) + '\n' + rs.map((x) => '• ' + x.demanda + ' (' + x.produto + ', ' + x.nt + '): ' + (x.data ? R.dataBR(x.data) : 'sem previsão') + ' · ' + x.rot + (x.feito ? '' : ' · ' + dtxt(x))).join('\n');
+    const ok = () => toast('Posição copiada'); const falha = () => { const ta = el('textarea'); ta.value = txt; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); ok(); } catch (e) { toast('Não foi possível copiar'); } ta.remove(); };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(ok, falha); else falha();
+  }
+  function exportar() {
+    const rs = filtrados(); const q = (v) => '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"';
+    const linhas = [['Cliente', 'Demanda', 'Produto', 'NT', 'Entrega ao cliente', 'Data no épico', 'Replanejada', 'Situação', 'Situação no Jira', 'Prazo legal', 'Épico'].map(q).join(';')].concat(rs.map((x) => [x.cliente, x.demanda, x.produto, x.nt, x.data ? R.dataBR(x.data) : '', x.fim ? R.dataBR(x.fim) : '', x.replan ? R.dataBR(x.replan) : '', x.rot, x.status, x.legal ? R.dataBR(x.legal) : '', x.chave].map(q).join(';')));
+    const blob = new Blob(['﻿' + linhas.join('\r\n')], { type: 'text/csv;charset=utf-8' });
+    const nomeArq = 'entregas-por-cliente-' + hoje + '.csv';
+    const direto = () => { const a = el('a'); a.href = URL.createObjectURL(blob); a.download = nomeArq; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500); };
+    if (dl) dl.save({ filename: nomeArq, data: blob }).catch((e) => { if (e && e.code !== 'declined') toast('Não foi possível exportar'); });
+    else direto();
+  }
+  let dl = null;
+  try { if (window.claude && typeof window.claude.use === 'function') window.claude.use('downloads').then((d) => { dl = d; }).catch(() => {}); } catch (e) {}
+  function render() {
+    const b = base(); const cont = { todos: b.length, venc: 0, sem: 0, prox: 0, ent: 0 }; b.forEach((r) => cont[r.sit]++);
+    const tabs = $('#cli-tabs'); tabs.replaceChildren(...TABS.map(([k, t]) => { const bt = el('button'); bt.type = 'button'; bt.setAttribute('role', 'tab'); bt.setAttribute('aria-selected', String(st.tab === k)); bt.append(t + ' '); bt.append(el('i', '', cont[k])); bt.onclick = () => { st.tab = k; render(); }; return bt; }));
+    const rs = filtrados();
+    $('#cli-n').textContent = new Set(rs.map((r) => r.cliente)).size + ' cliente(s) · ' + rs.length + ' entrega(s)';
+    $('#cli-grp').setAttribute('aria-pressed', String(st.grp));
+    $('#cli-ord').textContent = (st.atencao ? 'Atenção primeiro' : 'Por data') + ' ↕';
+    const tb = $('#cli-body'); tb.replaceChildren();
+    if (!rs.length) { const td = tb.insertRow().insertCell(); td.colSpan = 4; td.textContent = 'Nenhuma entrega com esses filtros.'; td.style.cursor = 'default'; }
+    if (rs.length && !rs.some((r) => r.chave === st.sel)) st.sel = rs[0].chave;
+    let ult = null;
+    rs.forEach((r) => {
+      if (st.grp && r.cliente !== ult) { const g = tb.insertRow(); g.className = 'rt-g'; const td = g.insertCell(); td.colSpan = 4; td.textContent = r.cliente + ' · ' + rs.filter((x) => x.cliente === r.cliente).length; ult = r.cliente; }
+      const tr = tb.insertRow(); tr.tabIndex = 0; if (r.chave === st.sel) tr.className = 'rt-sel';
+      const c1 = tr.insertCell(); c1.className = 'rt-c1'; c1.append(el('b', '', r.cliente), el('span', '', r.demanda)); c1.title = r.demanda;
+      const c2 = tr.insertCell(); c2.className = 'rt-c2'; const w2 = el('div'); w2.append(el('div', '', r.produto), el('span', '', r.nt)); c2.append(w2);
+      const c3 = tr.insertCell(); c3.className = 'rt-c3'; const dd = el('b', '', r.data ? R.dataBR(r.data) : 'A definir'); dd.style.color = r.sit === 'venc' ? 'var(--color-bad)' : r.sit === 'sem' ? 'var(--color-warn)' : ''; const w3 = el('div'); w3.append(dd, el('span', '', r.feito ? 'Concluída' : r.sit === 'venc' ? 'Prazo anterior' : r.replan ? 'Replanejada' : 'Previsão')); c3.append(w3);
+      const c4 = tr.insertCell(); const s = el('span', 'rt-st', r.rot); s.style.color = r.cor; c4.append(s);
+      const pick = () => { st.sel = r.chave; render(); if (window.innerWidth <= 900) $('#cli-painel').scrollIntoView({ behavior: 'smooth', block: 'start' }); };
+      tr.onclick = pick; tr.onkeydown = (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(); } };
+    });
+    painel(rs);
+    $('#cli-fonte').textContent = 'Fonte: Jira Linx, épicos das iniciativas ligadas às normas do painel "Acompanhamento ICT - Tech"' + (dataLida ? ', lido em ' + R.dataBR(dataLida) : '') + '. Data planejada = End Date do épico.';
+  }
+  $('#cli-q').addEventListener('input', (e) => { st.q = e.target.value.trim(); render(); });
+  $('#cli-prod').addEventListener('change', (e) => { st.prod = e.target.value; render(); });
+  $('#cli-nt').addEventListener('change', (e) => { st.nt = e.target.value; render(); });
+  $('#cli-de').addEventListener('change', (e) => { st.de = e.target.value; render(); });
+  $('#cli-ate').addEventListener('change', (e) => { st.ate = e.target.value; render(); });
+  $('#cli-grp').addEventListener('click', () => { st.grp = !st.grp; render(); });
+  $('#cli-ord').addEventListener('click', () => { st.atencao = !st.atencao; render(); });
+  $('#cli-exp').addEventListener('click', exportar);
+  $('#cli-limpar').addEventListener('click', () => { Object.assign(st, { tab: 'todos', q: '', prod: '', nt: '', de: '', ate: '' }); ['#cli-q', '#cli-prod', '#cli-nt', '#cli-de', '#cli-ate'].forEach((s) => { $(s).value = ''; }); render(); });
+  document.addEventListener('keydown', (e) => { if (e.key === '/' && !/input|select|textarea/i.test((document.activeElement || {}).tagName || '')) { e.preventDefault(); $('#cli-q').focus(); } });
+  render();
+})();
 </script>
 </div></div><script>(function(){const sh=document.querySelector('.rt-shell');const pinta=()=>requestAnimationFrame(()=>{document.body.style.background=getComputedStyle(sh).backgroundColor;});pinta();new MutationObserver(pinta).observe(document.documentElement,{attributes:true,attributeFilter:['data-mode']});matchMedia('(prefers-color-scheme: dark)').addEventListener('change',pinta);})();</script>
 </body>
