@@ -756,25 +756,75 @@ dash.draw('evolucao', (el) => {
   if (!$('#clientes')) return;
   const L = String(D.epicos || '').split('\n');
   const dataLida = (L[0] || '').split(' ')[1] || '';
-  const iI = L.indexOf('#I'), iE = L.indexOf('#E'), iF = L.indexOf('#FIM');
+  const iI = L.indexOf('#I'), iE = L.indexOf('#E'), iS = L.indexOf('#S'), iF = L.indexOf('#FIM');
   const efeitos = {};
   String(D.ict || '').split('\n').slice(1).forEach((l) => { const p = l.split('|'); if (p.length > 6) efeitos['BIGRETAIL-' + p[0]] = p[5]; });
   const ini = {};
   L.slice(iI + 1, iE).filter(Boolean).forEach((l) => { const [k, rest] = l.split('|'); ini[k] = (rest || '').split('^').map((x) => { const [chave, titulo] = x.split('~'); return { chave, titulo }; }); });
-  const ntDe = (ts) => { for (const t of ts) { const m = /(\d{4}\.\d{3})/.exec(t.titulo); if (m) return 'NT ' + m[1]; } const t = (ts[0] || {}).titulo || ''; const p = t.split(' - '); if (p[0].length <= 3 && p[1]) return p[1] + ' (' + p[0] + ')'; return (p[1] || p[0]).split(' ').slice(0, 5).join(' '); };
-  const limpa = (s) => { let t = s.replace(/^(?:[A-Za-zÀ-ú]+\s)(?=NF-e)/, '').replace(/^ICT\s/, ''); const p = t.split(' - '); const i = p.findIndex((x) => /Nota Técnica|^NT \d|NT 20\d\d/.test(x)); if (i >= 0 && i < p.length - 1) t = p.slice(i + 1).join(' - '); else if (i >= 0) t = t.replace(/^.*?(?:Nota Técnica|NT)\s*\d{4}\.\d{3}\s*(?:RTC)?\s*[-–]?\s*/, '') || t; else if (p.length > 1 && p[0].length <= 12) t = p.slice(1).join(' - '); t = t.replace(/^(?:Publicado a versão [\d.]+ da )/, '').replace(/\s+(?:do|da|de|dos|das|d|com|a|o|e|no|na)$/i, '').trim(); return t.charAt(0).toUpperCase() + t.slice(1); };
+  const ntTxt = (t) => { const m = /(\d{4}\.\d{3})/.exec(t || ''); return m ? 'NT ' + m[1] : ''; };
+  const ntDe = (ts) => { for (const t of ts) { const m = /(\d{4}\.\d{3})/.exec(t.titulo); if (m) return 'NT ' + m[1]; } const t = (ts[0] || {}).titulo || ''; if (!t) return ''; const p = t.split(' - '); if (p[0].length <= 3 && p[1]) return p[1] + ' (' + p[0] + ')'; return (p[1] || p[0]).split(' ').slice(0, 5).join(' '); };
+  const limpa = (s) => { let t = s.replace(/^\[[^\]]*\]\s*/g, '').replace(/^(?:[A-Za-zÀ-ú]+\s)(?=NF-e)/, '').replace(/^ICT\s/, ''); const p = t.split(' - '); const i = p.findIndex((x) => /Nota Técnica|^NT \d|NT 20\d\d/.test(x)); if (i >= 0 && i < p.length - 1) t = p.slice(i + 1).join(' - '); else if (i >= 0) t = t.replace(/^.*?(?:Nota Técnica|NT)\s*\d{4}\.\d{3}\s*(?:RTC)?\s*[-–]?\s*/, '') || t; else if (p.length > 1 && p[0].length <= 12) t = p.slice(1).join(' - '); t = t.replace(/^[\s,.;:–-]+/, '').replace(/^(?:Publicado a versão [\d.]+ da )/, '').replace(/\s+(?:do|da|de|dos|das|d|com|a|o|e|no|na)$/i, '').trim(); return t.charAt(0).toUpperCase() + t.slice(1); };
   const hoje = R.hojeISO();
-  const itens = L.slice(iE + 1, iF < 0 ? undefined : iF).filter(Boolean).map((l) => {
+  // Histórias de cada épico (seção #S): chave|épico|cliente|produto|status|categoria|resolvido|versões|resumo
+  const HS = {};
+  if (iS > 0) L.slice(iS + 1, iF < 0 ? undefined : iF).filter(Boolean).forEach((l) => { const [chave, epico, cliente, produto, status, cat, resolvido, versao, resumo] = l.split('|'); (HS[epico] = HS[epico] || []).push({ chave, cliente: cliente || '', produto: produto || '', status: status || '', cat, resolvido: resolvido || '', versao: versao || '', resumo: resumo || '' }); });
+  const NAOCLI = /^(|interno|ict|todos|4takes|sem cliente)$/i;
+  const clis = (c) => String(c || '').split('/').map((x) => x.trim()).filter((x) => !NAOCLI.test(x));
+  const fase = (h) => h.cat === 'done' ? 'ok' : /test|qa|homolog|valid/i.test(h.status) ? 'Em teste' : /build|pack/i.test(h.status) ? 'Aguardando pacote' : /dev|doing|progress|desenv/i.test(h.status) ? 'Em desenvolvimento' : /analys|anális/i.test(h.status) ? 'Em análise' : 'Na fila';
+  const ORDEMF = ['Na fila', 'Em análise', 'Em desenvolvimento', 'Em teste', 'Aguardando pacote'];
+  const NOTAS = D.notas || {};
+  const COR = { ent: 'var(--color-ok)', sem: 'var(--color-warn)', venc: 'var(--color-bad)', prox: 'var(--cds-chart-categorical-1)' };
+  const montar = (o) => {
+    const hs = o.hs || [];
+    const feitos = hs.filter((h) => h.cat === 'done');
+    let feito = o.epFeito, parcial = false, rot, dataEnt = '';
+    if (hs.length) {
+      if (feitos.length === hs.length) { feito = true; dataEnt = feitos.map((h) => h.resolvido).filter(Boolean).sort().pop() || ''; }
+      else if (!o.epFeito) { parcial = feitos.length > 0; feito = false; }
+    }
+    if (feito && !dataEnt) dataEnt = o.epResolvido || '';
+    const data = feito ? (dataEnt || o.prev) : o.prev;
+    let sit;
+    if (feito) sit = 'ent'; else if (!data) sit = 'sem'; else if (data < hoje) sit = 'venc'; else sit = 'prox';
+    if (feito) rot = 'Entregue';
+    else if (hs.length) { const pend = hs.filter((h) => h.cat !== 'done').map(fase); const f = ORDEMF.find((x) => pend.includes(x)) || 'Na fila'; rot = sit === 'venc' ? 'Prazo vencido' : parcial ? 'Entregue em parte' : f; }
+    else rot = sit === 'sem' ? 'Sem previsão' : sit === 'venc' ? 'Prazo vencido' : (o.rotBase || 'Planejado');
+    const versoes = [...new Set(hs.filter((h) => h.cat === 'done').flatMap((h) => h.versao.split('/')).filter(Boolean))];
+    return Object.assign(o, { feito, parcial, data, sit, rot, cor: COR[sit], resolvido: feito ? dataEnt : '', versoes, nota: NOTAS[o.chave] || o.nota || '' });
+  };
+  const itens = [];
+  L.slice(iE + 1, (iS > 0 ? iS : iF < 0 ? undefined : iF)).filter(Boolean).forEach((l) => {
     const [chave, resumo, cliente, produto, fim, replan, status, cat, resolvido, epst, ik] = l.split('|');
     const refs = ini[ik] || [];
     const legal = refs.map((r) => efeitos[r.chave]).filter(Boolean).sort()[0] || '';
-    const feito = cat === 'done' || epst === 'Finalizado';
-    const data = replan && replan !== fim ? replan : fim;
-    let sit;
-    if (feito) sit = 'ent'; else if (!data) sit = 'sem'; else if (data < hoje) sit = 'venc'; else sit = 'prox';
-    const rot = feito ? 'Entregue' : sit === 'sem' ? 'Sem previsão' : sit === 'venc' ? 'Prazo vencido' : (/doing|progress|desenv|andamento/i.test(status) ? 'Em desenvolvimento' : /valid|homolog|teste|qa/i.test(status) ? 'Em homologação' : 'Planejado');
-    const cor = { ent: 'var(--color-ok)', sem: 'var(--color-warn)', venc: 'var(--color-bad)', prox: 'var(--cds-chart-categorical-1)' }[sit];
-    return { chave, demanda: limpa(resumo), cliente: cliente || 'Sem cliente', produto: produto || '—', nt: ntDe(refs), fim, replan: replan && replan !== fim ? replan : '', data, resolvido, status, feito, sit, rot, cor, legal, refs };
+    const ntEp = ntDe(refs) || ntTxt(resumo) || '—';
+    const prev = replan && replan !== fim ? replan : fim;
+    const rotBase = /doing|progress|desenv|andamento/i.test(status) ? 'Em desenvolvimento' : /valid|homolog|teste|qa/i.test(status) ? 'Em teste' : 'Planejado';
+    const base = { epico: chave, demanda: limpa(resumo.length >= 88 ? resumo.replace(/\s+\S*$/, '') : resumo), fim, replan: replan && replan !== fim ? replan : '', prev, status, legal, refs, epFeito: cat === 'done' || epst === 'Finalizado', epResolvido: resolvido, rotBase, fonte: 'jira' };
+    const hs = HS[chave] || [];
+    const cliEp = clis(cliente);
+    if (cliEp.length) {
+      // Épico de um cliente: vale o que as histórias desse cliente dizem; se nenhuma história é dele mas todas são de um mesmo outro cliente, o cliente certo é o das histórias.
+      let meu = hs.filter((h) => clis(h.cliente).some((c) => cliEp.includes(c)) || !clis(h.cliente).length);
+      let nome = cliEp.join(' / ');
+      const outros = [...new Set(hs.flatMap((h) => clis(h.cliente)))];
+      let nota = '';
+      if (!hs.some((h) => clis(h.cliente).some((c) => cliEp.includes(c))) && outros.length === 1) { nome = outros[0]; meu = hs; nota = 'No épico o cliente está como ' + cliEp.join(' / ') + ', mas as histórias são de ' + outros[0] + '.'; }
+      itens.push(montar(Object.assign({}, base, { chave, cliente: nome, produto: produto || '—', nt: ntEp, hs: meu, nota })));
+      return;
+    }
+    // Épico interno ou do ICT: uma entrega por cliente das histórias (e por NT citada na história).
+    const grupos = {};
+    hs.forEach((h) => { const cs = clis(h.cliente); if (!cs.length) return; const nt = ntTxt(h.resumo) || ntEp; cs.forEach((c) => { const k = c + '|' + nt; (grupos[k] = grupos[k] || { c, nt, hs: [] }).hs.push(h); }); });
+    const ks = Object.keys(grupos);
+    ks.forEach((k, n) => { const g = grupos[k]; const prods = [...new Set(g.hs.map((h) => h.produto).filter(Boolean))]; itens.push(montar(Object.assign({}, base, { chave: chave + '#' + (n + 1), cliente: g.c, produto: prods.join(', ') || produto || '—', nt: g.nt, hs: g.hs, demanda: g.nt !== ntEp ? limpa(g.hs[0].resumo.length >= 98 ? g.hs[0].resumo.replace(/\s+\S*$/, '') : g.hs[0].resumo) : base.demanda }))); });
+    const ntsHist = new Set(Object.values(grupos).map((g) => g.nt));
+    if (!ks.length || !ntsHist.has(ntEp)) itens.push(montar(Object.assign({}, base, { chave, cliente: NAOCLI.test(cliente || '') ? 'Produto padrão (' + (cliente || 'sem cliente') + ')' : cliente, produto: produto || '—', nt: ntEp, hs: hs.filter((h) => !clis(h.cliente).length) })));
+  });
+  // Entregas informadas fora do Jira (controle manual, ex.: datas passadas pelo Andrey).
+  (Array.isArray(D.manuais) ? D.manuais : []).forEach((m, n) => {
+    const feito = /entregue/i.test(m.status || '');
+    itens.push(montar({ chave: 'MANUAL-' + (n + 1), epico: m.epico || '', cliente: m.cliente || 'Sem cliente', produto: m.produto || '—', nt: m.nt || '—', demanda: m.demanda || '', fim: '', replan: '', prev: m.previsao || '', status: m.status || '', legal: '', refs: [], epFeito: feito, epResolvido: feito ? (m.previsao || '') : '', rotBase: m.status || 'Planejado', hs: [], fonte: 'manual', origem: m.fonte || '', nota: m.obs || '' }));
   });
   const st = { tab: 'todos', q: '', prod: '', nt: '', de: '', ate: '', grp: false, atencao: true, sel: null };
   const TABS = [['todos', 'Todos'], ['venc', 'Prazo vencido'], ['sem', 'Sem previsão'], ['prox', 'Próximas entregas'], ['ent', 'Entregues']];
@@ -802,14 +852,18 @@ dash.draw('evolucao', (el) => {
       const top = el('div', 'rt-cp-top'); top.append(el('span', '', x.produto + ' · ' + x.nt)); const s = el('span', 'rt-st', x.rot); s.style.color = x.cor; top.append(s);
       c.append(top, el('div', 'rt-cp-dem', x.demanda));
       if (i === 0) {
-        c.append(el('div', 'rt-cp-dl', x.sit === 'venc' ? 'Último prazo informado' : x.feito ? 'Data planejada' : x.replan ? 'Nova previsão' : 'Entrega ao cliente'));
+        c.append(el('div', 'rt-cp-dl', x.feito ? 'Entregue em' : x.sit === 'venc' ? 'Último prazo informado' : x.fonte === 'manual' ? 'Previsão informada' : x.replan ? 'Nova previsão' : 'Previsão de entrega'));
         const d = el('div', 'rt-cp-data', x.data ? R.dataBR(x.data) : 'A definir'); d.style.color = x.sit === 'venc' ? 'var(--color-bad)' : x.sit === 'sem' ? 'var(--color-warn)' : x.feito ? 'var(--color-ok)' : ''; c.append(d, el('div', 'rt-cp-dl', dtxt(x)));
         const g = el('div', 'rt-cp-grid');
         const cel = (lb, v) => { const k = el('div', '', lb); k.append(el('b', '', v)); g.append(k); };
         cel('Data no épico (End Date)', x.fim ? R.dataBR(x.fim) : '—'); cel('Prazo legal da norma', x.legal ? R.dataBR(x.legal) : 'Sem data oficial');
         if (x.replan) cel('Replanejada para', R.dataBR(x.replan));
-        cel('Situação no Jira', x.status); cel('Código do épico', x.chave);
+        cel('Situação no Jira', x.fonte === 'manual' ? 'Sem item no Jira' : x.status); cel('Código do épico', x.epico || 'Sem épico no Jira');
+        if (x.versoes.length) cel('Versão liberada', x.versoes.join(', '));
         c.append(g);
+        if (x.nota) c.append(el('div', 'rt-cp-dl', 'Observação: ' + x.nota));
+        if (x.fonte === 'manual') c.append(el('div', 'rt-cp-dl', 'Fonte: ' + (x.origem || 'controle manual') + '. Data informada fora do Jira.'));
+        if (x.hs.length) { const dh = el('details'); dh.append(el('summary', '', 'Itens no Jira (' + x.hs.length + ')')); x.hs.forEach((h) => dh.append(el('p', '', h.chave + ' · ' + (h.cat === 'done' ? 'Concluída' + (h.resolvido ? ' em ' + R.dataBR(h.resolvido) : '') : h.status) + (h.versao ? ' · ' + h.versao : '') + ' · ' + h.resumo))); c.append(dh); }
         if (x.refs.length) { const dt = el('details'); dt.append(el('summary', '', 'Referência técnica')); x.refs.forEach((rf) => dt.append(el('p', '', rf.chave + ' · ' + rf.titulo))); c.append(dt); }
       } else {
         c.append(el('div', 'rt-cp-dl', (x.data ? R.dataBR(x.data) : 'A definir') + ' · ' + dtxt(x)));
@@ -819,13 +873,13 @@ dash.draw('evolucao', (el) => {
   }
   function toast(t) { let e = $('.rt-toast'); if (!e) { e = el('div', 'rt-toast'); document.body.appendChild(e); } e.textContent = t; e.classList.add('on'); clearTimeout(e._t); e._t = setTimeout(() => e.classList.remove('on'), 1800); }
   function copiar(cli, rs) {
-    const txt = 'Posição de entregas · ' + cli + ' · ' + R.dataBR(hoje) + '\n' + rs.map((x) => '• ' + x.demanda + ' (' + x.produto + ', ' + x.nt + '): ' + (x.data ? R.dataBR(x.data) : 'sem previsão') + ' · ' + x.rot + (x.feito ? '' : ' · ' + dtxt(x))).join('\n');
+    const txt = 'Posição de entregas · ' + cli + ' · ' + R.dataBR(hoje) + '\n' + rs.map((x) => '• ' + x.demanda + ' (' + x.produto + ', ' + x.nt + '): ' + (x.data ? R.dataBR(x.data) : 'sem previsão') + ' · ' + x.rot + (x.feito ? (x.versoes.length ? ' · versão ' + x.versoes.join(', ') : '') : ' · ' + dtxt(x))).join('\n');
     const ok = () => toast('Posição copiada'); const falha = () => { const ta = el('textarea'); ta.value = txt; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); ok(); } catch (e) { toast('Não foi possível copiar'); } ta.remove(); };
     if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(ok, falha); else falha();
   }
   function exportar() {
     const rs = filtrados(); const q = (v) => '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"';
-    const linhas = [['Cliente', 'Demanda', 'Produto', 'NT', 'Entrega ao cliente', 'Data no épico', 'Replanejada', 'Situação', 'Situação no Jira', 'Prazo legal', 'Épico'].map(q).join(';')].concat(rs.map((x) => [x.cliente, x.demanda, x.produto, x.nt, x.data ? R.dataBR(x.data) : '', x.fim ? R.dataBR(x.fim) : '', x.replan ? R.dataBR(x.replan) : '', x.rot, x.status, x.legal ? R.dataBR(x.legal) : '', x.chave].map(q).join(';')));
+    const linhas = [['Cliente', 'Demanda', 'Produto', 'NT', 'Entrega ao cliente', 'Data no épico', 'Replanejada', 'Situação', 'Situação no Jira', 'Prazo legal', 'Épico', 'Versão liberada', 'Fonte', 'Observação'].map(q).join(';')].concat(rs.map((x) => [x.cliente, x.demanda, x.produto, x.nt, x.data ? R.dataBR(x.data) : '', x.fim ? R.dataBR(x.fim) : '', x.replan ? R.dataBR(x.replan) : '', x.rot, x.fonte === 'manual' ? '' : x.status, x.legal ? R.dataBR(x.legal) : '', x.epico, x.versoes.join(', '), x.fonte === 'manual' ? (x.origem || 'Controle manual') : 'Jira', x.nota].map(q).join(';')));
     const blob = new Blob(['﻿' + linhas.join('\r\n')], { type: 'text/csv;charset=utf-8' });
     const nomeArq = 'entregas-por-cliente-' + hoje + '.csv';
     const direto = () => { const a = el('a'); a.href = URL.createObjectURL(blob); a.download = nomeArq; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500); };
@@ -850,13 +904,13 @@ dash.draw('evolucao', (el) => {
       const tr = tb.insertRow(); tr.tabIndex = 0; if (r.chave === st.sel) tr.className = 'rt-sel';
       const c1 = tr.insertCell(); c1.className = 'rt-c1'; c1.append(el('b', '', r.cliente), el('span', '', r.demanda)); c1.title = r.demanda;
       const c2 = tr.insertCell(); c2.className = 'rt-c2'; const w2 = el('div'); w2.append(el('div', '', r.produto), el('span', '', r.nt)); c2.append(w2);
-      const c3 = tr.insertCell(); c3.className = 'rt-c3'; const dd = el('b', '', r.data ? R.dataBR(r.data) : 'A definir'); dd.style.color = r.sit === 'venc' ? 'var(--color-bad)' : r.sit === 'sem' ? 'var(--color-warn)' : ''; const w3 = el('div'); w3.append(dd, el('span', '', r.feito ? 'Concluída' : r.sit === 'venc' ? 'Prazo anterior' : r.replan ? 'Replanejada' : 'Previsão')); c3.append(w3);
+      const c3 = tr.insertCell(); c3.className = 'rt-c3'; const dd = el('b', '', r.data ? R.dataBR(r.data) : 'A definir'); dd.style.color = r.sit === 'venc' ? 'var(--color-bad)' : r.sit === 'sem' ? 'var(--color-warn)' : ''; const w3 = el('div'); w3.append(dd, el('span', '', r.feito ? 'Entregue' + (r.versoes.length ? ' · ' + r.versoes[0] : '') : r.sit === 'venc' ? 'Prazo anterior' : r.fonte === 'manual' ? 'Informada (fora do Jira)' : r.replan ? 'Replanejada' : 'Previsão (End Date)')); c3.append(w3);
       const c4 = tr.insertCell(); const s = el('span', 'rt-st', r.rot); s.style.color = r.cor; c4.append(s);
       const pick = () => { st.sel = r.chave; render(); if (window.innerWidth <= 900) $('#cli-painel').scrollIntoView({ behavior: 'smooth', block: 'start' }); };
       tr.onclick = pick; tr.onkeydown = (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(); } };
     });
     painel(rs);
-    $('#cli-fonte').textContent = 'Fonte: Jira Linx, épicos das iniciativas ligadas às normas do painel "Acompanhamento ICT - Tech"' + (dataLida ? ', lido em ' + R.dataBR(dataLida) : '') + '. Data planejada = End Date do épico.';
+    $('#cli-fonte').textContent = 'Fonte: Jira Linx, épicos das iniciativas ligadas às normas do painel "Acompanhamento ICT - Tech" e as histórias de cada épico' + (dataLida ? ', lido em ' + R.dataBR(dataLida) : '') + '. Entregue = todas as histórias do cliente concluídas (data e versão da história). Previsão = End Date do épico. Entregas sem item no Jira vêm do controle manual, com a fonte indicada.';
   }
   $('#cli-q').addEventListener('input', (e) => { st.q = e.target.value.trim(); render(); });
   $('#cli-prod').addEventListener('change', (e) => { st.prod = e.target.value; render(); });
